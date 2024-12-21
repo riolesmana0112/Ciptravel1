@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->date('tanggal');
+            $table->string('mobil');
+            $table->string('plat_nomor');
+            $table->string('jemput');
+            $table->string('drop_off');
+            $table->dateTime('berangkat'); // Diisi manual
+            $table->dateTime('pulang'); // Diisi manual
+            $table->string('tujuan');
             $table->timestamps();
         });
     }
