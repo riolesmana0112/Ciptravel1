@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CarController;
@@ -15,29 +16,12 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-// Login
-Route::post('/login', function (Request $request) {
-    $username = $request->input('username');
-    $password = $request->input('password');
-    if ($username === 'ciptaindonesia' && $password === '12345678') {
-        $request->session()->put('is_admin', true); 
-        return redirect()->route('welcome');
-    }
-    // Fail
-    return redirect()->route('home')->withErrors(['Invalid credentials.']);
-})->name('login.process');
-
-// Welcome
-Route::get('/welcome', function () {
-    if (session('is_admin')) {
-        return view('welcome'); 
-    }
-    return redirect()->route('home'); 
-})->name('welcome');
+Route::post('/login', [AuthController::class, 'auth'])->name('login.process');
+Route::get('/welcome', [AuthController::class, 'index'])->name('welcome');
 
 // Logout
 Route::post('/logout', function (Request $request) {
-    $request->session()->flush(); 
+    $request->session()->flush();
     return redirect()->route('home');
 })->name('logout');
 
