@@ -9,13 +9,13 @@
 
     <!-- Display Validation Errors -->
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
 
     <!-- Action Buttons: Back to Home, Maintenance, BOP, Daily Report, Order Report, Add New Car -->
@@ -37,7 +37,7 @@
                 <i class="bi bi-cogs"></i> BOP
             </a>
 
-<!-- Daily Report Button (Added) -->
+            <!-- Daily Report Button (Added) -->
             <a href="{{ route('daily_report.index') }}" class="btn btn-secondary btn-lg">
                 <i class="bi bi-calendar"></i> Daily Report
             </a>
@@ -61,6 +61,7 @@
                 <tr>
                     <th>Mobil</th>
                     <th>Nomor Plat</th>
+                    <th>Gambar Mobil</th>
                     <th>Status</th>
                     <th>Kondisi</th>
                     <th>Deskripsi</th>
@@ -70,71 +71,70 @@
             </thead>
             <tbody>
                 @forelse ($cars as $car)
-                    <tr class="bg-white">
-                        <!-- Form to update car details -->
-                        <form action="{{ route('car.update', $car->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('PUT')
-                            <td>{{ $car->kendaraan }}</td>
-                            <td>{{ $car->plat_nomor }}</td>
-                            <td>
-                                <select name="status" class="form-select">
-                                    <option value="Available" {{ $car->status === 'Available' ? 'selected' : '' }}>Tersedia</option>
-                                    <option value="Busy" {{ $car->status === 'Busy' ? 'selected' : '' }}>Tak Tersedia</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="condition" class="form-select">
-                                    <option value="Good" {{ $car->condition === 'Good' ? 'selected' : '' }}>Bagus</option>
-                                    <option value="Poor" {{ $car->condition === 'Poor' ? 'selected' : '' }}>Rusak</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    name="keterangan" 
-                                    class="form-control" 
-                                    value="{{ $car->keterangan }}" 
-                                    placeholder="Enter details"
-                                >
-                            </td>
-                            <td class="text-center">
-                                <label>
-                                    <input type="hidden" name="verified" value="0">
-                                    <input 
-                                        type="checkbox" 
-                                        name="verified" 
-                                        value="1" 
-                                        class="large-checkbox" 
-                                        {{ $car->verified ? 'checked' : '' }}
-                                    >
-                                </label>
-                            </td>
-                            <td class="text-center">
-                                <!-- Save Button -->
-                                <form action="{{ route('car.update', $car->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('PUT')
-                                    <button type="submit" class="btn btn-primary btn-sm">
-                                        <i class="bi bi-save"></i> Save
-                                    </button>
-                                </form>
+                <tr class="bg-white">
+                    <!-- Form to update car details -->
+                    <form action="{{ route('car.update', $car->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('PUT')
+                        <td>{{ $car->kendaraan }}</td>
+                        <td>{{ $car->plat_nomor }}</td>
+                        <td><img class="img-thumbnail" src="{{ $car->car_image }}" /></td>
+                        <td>
+                            <select name="status" class="form-select">
+                                <option value="Available" {{ $car->status === 'Available' ? 'selected' : '' }}>Tersedia</option>
+                                <option value="Busy" {{ $car->status === 'Busy' ? 'selected' : '' }}>Tak Tersedia</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="condition" class="form-select">
+                                <option value="Good" {{ $car->condition === 'Good' ? 'selected' : '' }}>Bagus</option>
+                                <option value="Poor" {{ $car->condition === 'Poor' ? 'selected' : '' }}>Rusak</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="keterangan"
+                                class="form-control"
+                                value="{{ $car->keterangan }}"
+                                placeholder="Enter details">
+                        </td>
+                        <td class="text-center">
+                            <label>
+                                <input type="hidden" name="verified" value="0">
+                                <input
+                                    type="checkbox"
+                                    name="verified"
+                                    value="1"
+                                    class="large-checkbox"
+                                    {{ $car->verified ? 'checked' : '' }}>
+                            </label>
+                        </td>
+                        <td class="text-center">
+                            <!-- Save Button -->
+                            <form action="{{ route('car.update', $car->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-save"></i> Save
+                                </button>
+                            </form>
 
-                                <!-- Delete Form -->
-                                <form action="{{ route('car.destroy', $car->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this car?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </form>
-                    </tr>
+                            <!-- Delete Form -->
+                            <form action="{{ route('car.destroy', $car->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </button>
+                            </form>
+                        </td>
+                    </form>
+                </tr>
                 @empty
-                    <tr>
-                        <td colspan="7" class="text-center">No cars available</td>
-                    </tr>
+                <tr>
+                    <td colspan="7" class="text-center">No cars available</td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
@@ -149,7 +149,8 @@
         accent-color: #007bff;
     }
 
-    .table td, .table th {
+    .table td,
+    .table th {
         text-align: center;
         vertical-align: middle;
     }
@@ -158,7 +159,8 @@
         width: 100px;
     }
 
-    .table td, .table th {
+    .table td,
+    .table th {
         padding: 0.75rem 1rem;
     }
 </style>

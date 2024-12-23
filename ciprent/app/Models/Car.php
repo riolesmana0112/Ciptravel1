@@ -17,6 +17,8 @@ class Car extends Model
     protected $fillable = [
         'kendaraan',
         'plat_nomor',
+        'car_image',
+        'path',
         'status',
         'condition',
         'keterangan',

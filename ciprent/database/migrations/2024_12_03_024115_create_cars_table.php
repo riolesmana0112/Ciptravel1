@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id(); // Primary key
             $table->string('kendaraan'); // Nama kendaraan
             $table->string('plat_nomor'); // Plat nomor kendaraan
+            $table->string('car_image');
+            $table->string('path');
             $table->string('status')->default('available'); // Status kendaraan dengan default 'available'
             $table->string('condition')->nullable(); // Kondisi kendaraan
             $table->text('keterangan')->nullable(); // Keterangan tambahan
@@ -19,7 +21,7 @@ return new class extends Migration
             $table->timestamps(); // Kolom created_at dan updated_at
         });
     }
-    
+
     public function down()
     {
         Schema::dropIfExists('cars'); // Menghapus tabel jika rollback migrasi
