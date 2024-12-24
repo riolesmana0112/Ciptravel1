@@ -11,6 +11,16 @@ class BaseController extends Controller
 {
     use Authenticatable;
 
+    protected function validateAuth($page = '', $data = [])
+    {
+        $auth = session()->has('auth');
+        if ($auth == NULL) {
+            return redirect()->route('home')->withErrors(['please login first!']);
+        }
+
+        return view($page, compact('data'));
+    }
+
     protected function getUserByUsername($username)
     {
         $user = self::user()->whereUsername($username)->first();

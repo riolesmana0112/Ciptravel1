@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
+    function login()
+    {
+        $auth = session()->has('auth');
+        if ($auth != NULL) {
+            return redirect()->route('welcome')->withErrors(['please login first!']);
+        }
+
+        return view('home');
+    }
+
     function index()
     {
         $auth = session()->has('auth');
@@ -17,6 +27,17 @@ class AuthController extends BaseController
 
         $data = session('auth');
         return view('welcome', compact('data'));
+    }
+
+    function masterVehicle()
+    {
+        $auth = session()->has('auth');
+        if ($auth == NULL) {
+            return redirect()->route('home')->withErrors(['please login first!']);
+        }
+
+        $data = session('auth');
+        return view('master.index', compact('data'));
     }
 
     function auth(Request $request)

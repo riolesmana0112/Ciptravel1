@@ -10,11 +10,9 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BopController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\MasterVehicle;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
+Route::get('/', [AuthController::class, 'login'])->name('home');
 Route::post('/login', [AuthController::class, 'auth'])->name('login.process');
 Route::get('/welcome', [AuthController::class, 'index'])->name('welcome');
 
@@ -23,6 +21,12 @@ Route::post('/logout', function (Request $request) {
     $request->session()->flush();
     return redirect()->route('home');
 })->name('logout');
+
+// Master Data
+Route::prefix('master')->group(function () {
+    Route::get('/', [AuthController::class, 'masterVehicle'])->name('master.index');
+    Route::resource('/vehicle', MasterVehicle::class);
+});
 
 // Employee
 Route::prefix('employee')->group(function () {

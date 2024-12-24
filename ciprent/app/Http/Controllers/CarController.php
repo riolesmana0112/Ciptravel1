@@ -73,7 +73,7 @@ class CarController extends Controller
     public function update(Request $request, $id)
     {
         // Validasi input data
-        $validated = $request->validate([
+        $request->validate([
             'status' => 'required',
             'condition' => 'required',
             'keterangan' => 'nullable|string',
