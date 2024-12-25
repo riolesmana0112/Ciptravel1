@@ -10,6 +10,9 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BopController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\MasterDropController;
+use App\Http\Controllers\MasterPickupController;
+use App\Http\Controllers\MasterPricelistController;
 use App\Http\Controllers\MasterVehicle;
 
 Route::get('/', [AuthController::class, 'login'])->name('home');
@@ -26,6 +29,9 @@ Route::post('/logout', function (Request $request) {
 Route::prefix('master')->group(function () {
     Route::get('/', [AuthController::class, 'masterVehicle'])->name('master.index');
     Route::resource('/vehicle', MasterVehicle::class);
+    Route::resource('/pickup', MasterPickupController::class);
+    Route::resource('/drop', MasterDropController::class);
+    Route::resource('/pricelist', MasterPricelistController::class);
 });
 
 // Employee

@@ -30,6 +30,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->double('price');
             $table->double('charge_per_hour')->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }

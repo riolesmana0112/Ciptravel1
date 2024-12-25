@@ -18,15 +18,15 @@
         <a href="{{ route('vehicle.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
             Master Vehicle Data
         </a>
-        <a href="{{ route('car.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+        <a href="{{ route('pickup.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
             Master Pickup Data
         </a>
-        <a href="{{ route('master.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+        <a href="{{ route('drop.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
             Master Drop Data
         </a>
-        {{-- <a href="{{ route('pricelist.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
-        Master Drop Data
-        </a> --}}
+        <a href="{{ route('pricelist.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+            Master Price List
+        </a>
     </div>
     <div class="d-flex justify-content-center">
         <a href="{{ route('home') }}" class="btn btn-danger">
