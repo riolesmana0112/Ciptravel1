@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Core\BaseController;
-use App\Models\MasterVehicle as ModelsMasterVehicle;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -15,7 +14,7 @@ class MasterVehicle extends BaseController
      */
     public function index()
     {
-        $data = ModelsMasterVehicle::all();
+        $data = self::vehicle()->all();
         return self::validateAuth('master.vehicle.index', $data);
     }
 
@@ -41,7 +40,7 @@ class MasterVehicle extends BaseController
 
         $pathName = 'vehicle_picture_' . Carbon::now()->format("Y-m-d-h-i-s") . '.' . $request->file('vehicle_picture')->extension();
         $request->file('vehicle_picture')->move(base_path('public/upload/vehicle/'), $pathName);
-        ModelsMasterVehicle::create([
+        self::vehicle()->create([
             'vehicle_type' => $request->vehicle_type,
             'vehicle_number' => $request->vehicle_number,
             'vehicle_name' => $request->vehicle_name,
@@ -57,7 +56,7 @@ class MasterVehicle extends BaseController
      */
     public function edit(string $id)
     {
-        $data = ModelsMasterVehicle::findOrFail($id);
+        $data = self::vehicle()->findOrFail($id);
         return self::validateAuth('master.vehicle.edit', $data);
     }
 
@@ -72,7 +71,7 @@ class MasterVehicle extends BaseController
             'vehicle_name' => 'required|string|max:255',
         ]);
 
-        $data = ModelsMasterVehicle::findOrFail($id);
+        $data = self::vehicle()->findOrFail($id);
 
         if (isset($request->vehicle_picture)) {
             $request->validate([
@@ -95,7 +94,7 @@ class MasterVehicle extends BaseController
      */
     public function destroy(string $id)
     {
-        $data = ModelsMasterVehicle::findOrFail($id);
+        $data = self::vehicle()->findOrFail($id);
         $path = public_path('upload/vehicle/' . $data->vehicle_path);
 
         File::delete($path);

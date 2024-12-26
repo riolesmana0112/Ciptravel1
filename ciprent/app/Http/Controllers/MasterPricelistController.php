@@ -16,7 +16,7 @@ class MasterPricelistController extends BaseController
      */
     public function index()
     {
-        $data = PriceList::with('vehicle', 'pickup_point', 'drop_point')->get();
+        $data = self::pricelist()->with('vehicle', 'pickup_point', 'drop_point')->get();
         return self::validateAuth('master.pricelist.index', $data);
     }
 
@@ -49,7 +49,7 @@ class MasterPricelistController extends BaseController
             'description' => 'required|string'
         ]);
 
-        PriceList::create([
+        self::pricelist()->create([
             'vehicle_id' => $request->vehicle_id,
             'pickup_id' => $request->pickup_id,
             'driop_id' => $request->drop_id,
@@ -87,7 +87,7 @@ class MasterPricelistController extends BaseController
      */
     public function destroy(string $id)
     {
-        $data = PriceList::findOrFail($id);
+        $data = self::pricelist()->findOrFail($id);
         $data->delete();
         return redirect()->route('pricelist.index')->with('status', 'Price List has been deleted!');
     }

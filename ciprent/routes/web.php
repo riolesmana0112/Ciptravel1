@@ -8,12 +8,19 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BopController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\MasterDropController;
 use App\Http\Controllers\MasterPickupController;
 use App\Http\Controllers\MasterPricelistController;
 use App\Http\Controllers\MasterVehicle;
+
+Route::group([
+    'prefix' => 'api'
+], function ($router) {
+    Route::get('vehicle', [ContentController::class, 'vehicle']);
+});
 
 Route::get('/', [AuthController::class, 'login'])->name('home');
 Route::post('/login', [AuthController::class, 'auth'])->name('login.process');
