@@ -15,7 +15,7 @@ class PriceList extends Model
 
     function vehicle(): HasOne
     {
-        return self::hasOne(MasterVehicle::class, 'id', 'vehicle_id')->select('id', 'vehicle_type', 'vehicle_name');
+        return self::hasOne(MasterVehicle::class, 'id', 'vehicle_id')->select('id', 'vehicle_type', 'vehicle_name', 'vehicle_picture');
     }
 
     function drop_point(): HasOne
