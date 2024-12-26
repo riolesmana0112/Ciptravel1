@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Authenticatable;
 use App\Models\MasterVehicle as ModelsMasterVehicle;
+use App\Models\MaterDrop;
+use App\Models\MaterPickup;
 use App\Models\PriceList;
 
 class BaseController extends Controller
@@ -15,6 +17,16 @@ class BaseController extends Controller
     protected function pricelist()
     {
         return new PriceList;
+    }
+
+    protected function pickup()
+    {
+        return new MaterPickup;
+    }
+
+    protected function drop()
+    {
+        return new MaterDrop;
     }
 
     protected function vehicle()

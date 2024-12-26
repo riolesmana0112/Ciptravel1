@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Core\BaseController;
-use App\Models\MaterPickup;
 use Illuminate\Http\Request;
 
 class MasterPickupController extends BaseController
@@ -13,7 +12,7 @@ class MasterPickupController extends BaseController
      */
     public function index()
     {
-        $data = MaterPickup::all();
+        $data = self::pickup()->all();
         return self::validateAuth('master.pickup.index', $data);
     }
 
@@ -34,7 +33,7 @@ class MasterPickupController extends BaseController
             'pickup_name' => 'required|string|max:255',
         ]);
 
-        MaterPickup::create([
+        self::pickup()->create([
             'pickup_name' => $request->pickup_name,
         ]);
 
@@ -46,7 +45,7 @@ class MasterPickupController extends BaseController
      */
     public function edit(string $id)
     {
-        $data = MaterPickup::findOrFail($id);
+        $data = self::pickup()->findOrFail($id);
         return self::validateAuth('master.pickup.edit', $data);
     }
 
@@ -59,7 +58,7 @@ class MasterPickupController extends BaseController
             'pickup_name' => 'required|string|max:255',
         ]);
 
-        $data = MaterPickup::findOrFail($id);
+        $data = self::pickup()->findOrFail($id);
         $data->pickup_name = $request->pickup_name;
         $data->save();
 
@@ -71,7 +70,7 @@ class MasterPickupController extends BaseController
      */
     public function destroy(string $id)
     {
-        $data = MaterPickup::findOrFail($id);
+        $data = self::pickup()->findOrFail($id);
         $data->delete();
         return redirect()->route('pickup.index')->with('status', 'Pickup has been deleted!');
     }

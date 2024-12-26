@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Core\BaseController;
-use App\Models\MaterDrop;
 use Illuminate\Http\Request;
 
 class MasterDropController extends BaseController
 {
     public function index()
     {
-        $data = MaterDrop::all();
+        $data = self::drop()->all();
         return self::validateAuth('master.drop.index', $data);
     }
 
@@ -31,7 +30,7 @@ class MasterDropController extends BaseController
             'drop_name' => 'required|string|max:255',
         ]);
 
-        MaterDrop::create([
+        self::drop()->create([
             'drop_name' => $request->drop_name,
         ]);
 
@@ -43,7 +42,7 @@ class MasterDropController extends BaseController
      */
     public function edit(string $id)
     {
-        $data = MaterDrop::findOrFail($id);
+        $data = self::drop()->findOrFail($id);
         return self::validateAuth('master.drop.edit', $data);
     }
 
@@ -56,7 +55,7 @@ class MasterDropController extends BaseController
             'drop_name' => 'required|string|max:255',
         ]);
 
-        $data = MaterDrop::findOrFail($id);
+        $data = self::drop()->findOrFail($id);
         $data->drop_name = $request->drop_name;
         $data->save();
 
@@ -68,7 +67,7 @@ class MasterDropController extends BaseController
      */
     public function destroy(string $id)
     {
-        $data = MaterDrop::findOrFail($id);
+        $data = self::drop()->findOrFail($id);
         $data->delete();
         return redirect()->route('drop.index')->with('status', 'drop has been deleted!');
     }

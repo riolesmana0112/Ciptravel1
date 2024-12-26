@@ -20,6 +20,8 @@ Route::group([
     'prefix' => 'api'
 ], function ($router) {
     Route::get('vehicle', [ContentController::class, 'vehicle']);
+    Route::get('pickup', [ContentController::class, 'pickupData']);
+    Route::get('drop', [ContentController::class, 'dropData']);
 });
 
 Route::get('/', [AuthController::class, 'login'])->name('home');
