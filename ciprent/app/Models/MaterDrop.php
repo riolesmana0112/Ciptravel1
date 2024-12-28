@@ -10,5 +10,5 @@ class MaterDrop extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['drop_name'];
+    protected $fillable = ['drop_name', 'alias'];
 }

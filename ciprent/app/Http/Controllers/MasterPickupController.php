@@ -31,10 +31,12 @@ class MasterPickupController extends BaseController
     {
         $request->validate([
             'pickup_name' => 'required|string|max:255',
+            'alias' => 'required|string|max:5|unique:mater_pickups,alias',
         ]);
 
         self::pickup()->create([
             'pickup_name' => $request->pickup_name,
+            'alias' => $request->alias,
         ]);
 
         return redirect()->route('pickup.index')->with('status', 'Pickup Has been Added!');
@@ -56,10 +58,12 @@ class MasterPickupController extends BaseController
     {
         $request->validate([
             'pickup_name' => 'required|string|max:255',
+            'alias' => 'required|string|max:5|unique:mater_pickups,alias',
         ]);
 
         $data = self::pickup()->findOrFail($id);
         $data->pickup_name = $request->pickup_name;
+        $data->alias = $request->alias;
         $data->save();
 
         return redirect()->route('pickup.index')->with('status', 'Pickup has been updated!');

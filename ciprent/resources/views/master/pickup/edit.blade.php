@@ -32,6 +32,18 @@
                 value="{{ $data->pickup_name }}">
         </div>
 
+        <div class="mb-3">
+            <label for="alias" class="form-label">Alias</label>
+            <input
+                type="text"
+                name="alias"
+                id="alias"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->alias }}">
+        </div>
+
 
         <!-- Buttons for Back and Save -->
         <div class="d-flex justify-content-between">

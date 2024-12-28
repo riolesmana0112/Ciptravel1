@@ -19,7 +19,7 @@
         enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="kendaraan" class="form-label">Pickup Name</label>
+            <label for="pickup_name" class="form-label">Pickup Name</label>
             <input
                 type="text"
                 name="pickup_name"
@@ -28,6 +28,18 @@
                 required
                 autocomplete="off"
                 value="{{ old('pickup_name') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="alias" class="form-label">Pickup Name</label>
+            <input
+                type="text"
+                name="alias"
+                id="alias"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ old('alias') }}">
         </div>
 
         <!-- Buttons for Back and Save -->

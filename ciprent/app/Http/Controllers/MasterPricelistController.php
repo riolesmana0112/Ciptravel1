@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Core\BaseController;
-use App\Models\MasterVehicle;
-use App\Models\MaterDrop;
-use App\Models\MaterPickup;
-use App\Models\PriceList;
 use Illuminate\Http\Request;
 
 class MasterPricelistController extends BaseController
@@ -29,9 +25,9 @@ class MasterPricelistController extends BaseController
         if ($auth == NULL) {
             return redirect()->route('home')->withErrors(['please login first!']);
         }
-        $vehicle = MasterVehicle::select('id', 'vehicle_type', 'vehicle_name')->get();
-        $pickup = MaterPickup::select('id', 'pickup_name')->get();
-        $drop = MaterDrop::select('id', 'drop_name')->get();
+        $vehicle = self::pricelist()->select('id', 'vehicle_type', 'vehicle_name')->get();
+        $pickup = self::pickup()->select('id', 'pickup_name')->get();
+        $drop = self::drop()->select('id', 'drop_name')->get();
         return view('master.pricelist.create', compact('vehicle', 'pickup', 'drop'));
     }
 

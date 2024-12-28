@@ -46,6 +46,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Pickup Name</th>
+                    <th>Alias</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -54,6 +55,7 @@
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $pickup->pickup_name }}</td>
+                    <td>{{ $pickup->alias }}</td>
 
                     <td class="text-center">
                         <!-- Save Button -->

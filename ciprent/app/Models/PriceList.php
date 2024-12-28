@@ -20,11 +20,11 @@ class PriceList extends Model
 
     function drop_point(): HasOne
     {
-        return self::hasOne(MaterDrop::class, 'id', 'driop_id')->select('id', 'drop_name');
+        return self::hasOne(MaterDrop::class, 'id', 'driop_id')->select('id', 'drop_name', 'alias');
     }
 
     function pickup_point(): HasOne
     {
-        return self::hasOne(MaterPickup::class, 'id', 'pickup_id')->select('id', 'pickup_name');
+        return self::hasOne(MaterPickup::class, 'id', 'pickup_id')->select('id', 'pickup_name', 'alias');
     }
 }

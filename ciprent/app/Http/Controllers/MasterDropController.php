@@ -28,10 +28,12 @@ class MasterDropController extends BaseController
     {
         $request->validate([
             'drop_name' => 'required|string|max:255',
+            'alias' => 'required|string|max:5|unique:mater_drops,alias',
         ]);
 
         self::drop()->create([
             'drop_name' => $request->drop_name,
+            'alias' => $request->alias,
         ]);
 
         return redirect()->route('drop.index')->with('status', 'drop Has been Added!');
@@ -53,10 +55,12 @@ class MasterDropController extends BaseController
     {
         $request->validate([
             'drop_name' => 'required|string|max:255',
+            'alias' => 'required|string|max:5|unique:mater_drops,alias',
         ]);
 
         $data = self::drop()->findOrFail($id);
         $data->drop_name = $request->drop_name;
+        $data->alias = $request->alias;
         $data->save();
 
         return redirect()->route('drop.index')->with('status', 'drop has been updated!');

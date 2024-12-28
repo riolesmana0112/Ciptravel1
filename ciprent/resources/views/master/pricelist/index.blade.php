@@ -59,8 +59,8 @@
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $pricelist->vehicle->vehicle_name }} - {{ $pricelist->vehicle->vehicle_type }}</td>
-                    <td>{{ $pricelist->pickup_point->pickup_name }}</td>
-                    <td>{{ $pricelist->drop_point->drop_name }}</td>
+                    <td>{{ $pricelist->pickup_point->pickup_name }} ({{ $pricelist->pickup_point->alias }})</td>
+                    <td>{{ $pricelist->drop_point->drop_name }} ({{ $pricelist->drop_point->alias }})</td>
                     <td>Rp. {{ number_format($pricelist->price, 0, ',', '.') }}</td>
                     <td>Rp. {{ number_format($pricelist->charge_per_hour, 0, ',', '.') }}</td>
                     <td>{!! $pricelist->description !!}</td>

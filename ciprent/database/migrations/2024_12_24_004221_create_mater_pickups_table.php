@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mater_pickups', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('pickup_name');
+            $table->string('alias', 5)->unique();
             $table->timestamps();
         });
     }

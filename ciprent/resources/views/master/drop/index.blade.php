@@ -46,6 +46,7 @@
                 <tr>
                     <th>No.</th>
                     <th>drop Name</th>
+                    <th>Alias</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -54,6 +55,7 @@
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $drop->drop_name }}</td>
+                    <td>{{ $drop->alias }}</td>
 
                     <td class="text-center">
                         <!-- Save Button -->

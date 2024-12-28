@@ -10,5 +10,5 @@ class MaterPickup extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['pickup_name'];
+    protected $fillable = ['pickup_name', 'alias'];
 }
