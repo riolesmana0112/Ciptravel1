@@ -19,9 +19,10 @@ use App\Http\Controllers\MasterVehicle;
 Route::group([
     'prefix' => 'api'
 ], function ($router) {
-    Route::get('vehicle', [ContentController::class, 'vehicle']);
+    Route::get('vehicle', [ContentController::class, 'listVehicle']);
     Route::get('pickup', [ContentController::class, 'pickupData']);
     Route::get('drop', [ContentController::class, 'dropData']);
+    Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
 });
 
 Route::get('/', [AuthController::class, 'login'])->name('home');

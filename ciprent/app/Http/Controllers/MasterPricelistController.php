@@ -25,7 +25,7 @@ class MasterPricelistController extends BaseController
         if ($auth == NULL) {
             return redirect()->route('home')->withErrors(['please login first!']);
         }
-        $vehicle = self::pricelist()->select('id', 'vehicle_type', 'vehicle_name')->get();
+        $vehicle = self::vehicle()->select('id', 'vehicle_type', 'vehicle_name')->get();
         $pickup = self::pickup()->select('id', 'pickup_name')->get();
         $drop = self::drop()->select('id', 'drop_name')->get();
         return view('master.pricelist.create', compact('vehicle', 'pickup', 'drop'));

@@ -27,4 +27,5 @@ class PriceList extends Model
     {
         return self::hasOne(MaterPickup::class, 'id', 'pickup_id')->select('id', 'pickup_name', 'alias');
     }
+    
 }
