@@ -28,6 +28,17 @@
             Master Price List
         </a>
     </div>
+    <div class="d-flex justify-content-center mb-4">
+        <a href="{{ route('tour.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+            Master Tour
+        </a>
+        <a href="{{ route('pickup.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+           Tour Detail
+        </a>
+        <a href="{{ route('drop.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+            Tour Gallery
+        </a>
+    </div>
     <div class="d-flex justify-content-center">
         <a href="{{ route('home') }}" class="btn btn-danger">
             Back to Home

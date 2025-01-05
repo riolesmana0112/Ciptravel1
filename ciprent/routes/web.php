@@ -15,6 +15,7 @@ use App\Http\Controllers\MasterDropController;
 use App\Http\Controllers\MasterPickupController;
 use App\Http\Controllers\MasterPricelistController;
 use App\Http\Controllers\MasterVehicle;
+use App\Http\Controllers\MasterTourController;
 
 Route::group([
     'prefix' => 'api'
@@ -42,6 +43,8 @@ Route::prefix('master')->group(function () {
     Route::resource('/pickup', MasterPickupController::class);
     Route::resource('/drop', MasterDropController::class);
     Route::resource('/pricelist', MasterPricelistController::class);
+
+    Route::resource('/tour', MasterTourController::class);
 });
 
 // Employee

@@ -9,10 +9,16 @@ use App\Models\MasterVehicle as ModelsMasterVehicle;
 use App\Models\MaterDrop;
 use App\Models\MaterPickup;
 use App\Models\PriceList;
+use App\Models\masterTour;
 
 class BaseController extends Controller
 {
     use Authenticatable;
+    
+    protected function masterTour()
+    {
+        return new masterTour;
+    }
 
     protected function pricelist()
     {
