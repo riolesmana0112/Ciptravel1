@@ -32,7 +32,7 @@
         <a href="{{ route('tour.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
             Master Tour
         </a>
-        <a href="{{ route('pickup.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+        <a href="{{ route('tour-detail.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
            Tour Detail
         </a>
         <a href="{{ route('drop.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">

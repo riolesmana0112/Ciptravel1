@@ -16,6 +16,7 @@ use App\Http\Controllers\MasterPickupController;
 use App\Http\Controllers\MasterPricelistController;
 use App\Http\Controllers\MasterVehicle;
 use App\Http\Controllers\MasterTourController;
+use App\Http\Controllers\TourDetailController;
 
 Route::group([
     'prefix' => 'api'
@@ -45,6 +46,11 @@ Route::prefix('master')->group(function () {
     Route::resource('/pricelist', MasterPricelistController::class);
 
     Route::resource('/tour', MasterTourController::class);
+    Route::get('/tour-detail', [TourDetailController::class, 'index'])->name('tour-detail.index');
+    Route::get('/tour-detail/create', [TourDetailController::class, 'create'])->name('tour-detail.create');
+    Route::post('/tour-detail', [TourDetailController::class, 'store'])->name('tour-detail.store');
+    Route::get('/tour-detail/{id}/edit', [TourDetailController::class, 'edit'])->name('tour-detail.edit');
+    Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
 });
 
 // Employee
