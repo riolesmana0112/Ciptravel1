@@ -1,45 +1,57 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CarController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BopController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\MasterDropController;
+use App\Http\Controllers\MasterPickupController;
+use App\Http\Controllers\MasterPricelistController;
+use App\Http\Controllers\MasterVehicle;
+use App\Http\Controllers\MasterTourController;
+use App\Http\Controllers\TourDetailController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::group([
+    'prefix' => 'api'
+], function ($router) {
+    Route::get('vehicle', [ContentController::class, 'listVehicle']);
+    Route::get('pickup', [ContentController::class, 'pickupData']);
+    Route::get('drop', [ContentController::class, 'dropData']);
+    Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
+});
 
-// Login
-Route::post('/login', function (Request $request) {
-    $username = $request->input('username');
-    $password = $request->input('password');
-    if ($username === 'ciptaindonesia' && $password === '12345678') {
-        $request->session()->put('is_admin', true); 
-        return redirect()->route('welcome');
-    }
-    // Fail
-    return redirect()->route('home')->withErrors(['Invalid credentials.']);
-})->name('login.process');
-
-// Welcome
-Route::get('/welcome', function () {
-    if (session('is_admin')) {
-        return view('welcome'); 
-    }
-    return redirect()->route('home'); 
-})->name('welcome');
+Route::get('/', [AuthController::class, 'login'])->name('home');
+Route::post('/login', [AuthController::class, 'auth'])->name('login.process');
+Route::get('/welcome', [AuthController::class, 'index'])->name('welcome');
 
 // Logout
 Route::post('/logout', function (Request $request) {
-    $request->session()->flush(); 
+    $request->session()->flush();
     return redirect()->route('home');
 })->name('logout');
+
+// Master Data
+Route::prefix('master')->group(function () {
+    Route::get('/', [AuthController::class, 'masterVehicle'])->name('master.index');
+    Route::resource('/vehicle', MasterVehicle::class);
+    Route::resource('/pickup', MasterPickupController::class);
+    Route::resource('/drop', MasterDropController::class);
+    Route::resource('/pricelist', MasterPricelistController::class);
+
+    Route::resource('/tour', MasterTourController::class);
+    Route::get('/tour-detail', [TourDetailController::class, 'index'])->name('tour-detail.index');
+    Route::get('/tour-detail/create', [TourDetailController::class, 'create'])->name('tour-detail.create');
+    Route::post('/tour-detail', [TourDetailController::class, 'store'])->name('tour-detail.store');
+    Route::get('/tour-detail/{id}/edit', [TourDetailController::class, 'edit'])->name('tour-detail.edit');
+    Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
+});
 
 // Employee
 Route::prefix('employee')->group(function () {
