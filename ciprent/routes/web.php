@@ -17,6 +17,7 @@ use App\Http\Controllers\MasterPricelistController;
 use App\Http\Controllers\MasterVehicle;
 use App\Http\Controllers\MasterTourController;
 use App\Http\Controllers\TourDetailController;
+use App\Http\Controllers\TourGalleryController;
 
 Route::group([
     'prefix' => 'api'
@@ -51,6 +52,8 @@ Route::prefix('master')->group(function () {
     Route::post('/tour-detail', [TourDetailController::class, 'store'])->name('tour-detail.store');
     Route::get('/tour-detail/{id}/edit', [TourDetailController::class, 'edit'])->name('tour-detail.edit');
     Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
+
+    Route::post('/tour-gallery', [TourGalleryController::class, 'store'])->name('tour-gallery.store');
 });
 
 // Employee

@@ -11,11 +11,17 @@ use App\Models\MaterPickup;
 use App\Models\PriceList;
 use App\Models\MasterTour;
 use App\Models\TourDetail;
+use App\Models\TourGallery;
 
 class BaseController extends Controller
 {
     use Authenticatable;
     
+    protected function tourGallery()
+    {
+        return new TourGallery;
+    }
+
     protected function tourDetail()
     {
         return new TourDetail;

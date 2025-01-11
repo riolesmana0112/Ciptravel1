@@ -9,7 +9,8 @@ class TourDetailController extends BaseController
 {
     function index()
     {
-        $data = self::tourDetail()->with('masterTour')->get();
+        $data = self::tourDetail()->with('masterTour', 'gallery')->get();
+        // return $data;
         return self::validateAuth('master.tour.detail.index', compact('data'));
     }
 

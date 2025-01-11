@@ -8,23 +8,12 @@
     </div>
 
     <!-- Display Validation Errors -->
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
     @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
     @endif
 
-    <!-- Action Buttons: Back to Home, Maintenance, BOP, Daily Report, Order Report, Add New Car -->
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
         <!-- Back to Welcome Button -->
         <a href="{{ route('master.index') }}" class="btn btn-outline-primary btn-lg">
@@ -58,11 +47,12 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($data) > 0)
                 @forelse ($data as $tourDetail)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ $tourDetail[$loop->index]['masterTour']['product_name'] }}</td>
                     <td>{{ $tourDetail[$loop->index]['tour_title'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]->master_tour }}</td>
                     <td>{{ $tourDetail[$loop->index]['start_date'] }}</td>
                     <td>{{ $tourDetail[$loop->index]['end_date'] }}</td>
                     <td>{{ $tourDetail[$loop->index]['pickup'] }}</td>
@@ -74,13 +64,35 @@
                     </td>
                     <td>{!! $tourDetail[$loop->index]['fasilities'] !!}</td>
                     <td>
-                        <form class="d-inline">
-                            <input type="hidden" value=" {{ $tourDetail[$loop->index]['fasilities'] }}"/>
-                            <input type="file" name="gallery" id="gallery" class="form-control" required>
+                        <form class="d-inline" 
+                            action="{{ route('tour-gallery.store') }}" 
+                            method="POST"
+                            enctype="multipart/form-data"
+                            >
+                            @csrf
+                            <input type="hidden" name="tour_detail_id" value=" {{ $tourDetail[$loop->index]['id'] }}"/>
+                            <input type="file" name="path" id="path" class="form-control" required>
+                            @if(isset($errors->path))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->path as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <button type="submit" class="btn btn-primary btn-sm my-2">
                                 <i class="bi bi-save"></i> upload
                             </button>
                         </form>
+                        
+                        @if(count($tourDetail[$loop->index]['gallery']) > 0)
+                        <div class="flex">
+                            @foreach($tourDetail[$loop->index]['gallery'] as $gallery)
+                            <img class="img-thumbnail" src="{{ $gallery->path }}" width="100"/>
+                            @endforeach
+                        </div>
+                        @endif
                     </td>
                     <td>
                         <a href="{{ route('tour-detail.edit', $tourDetail[$loop->index]['id']) }}" class="btn btn-primary btn-sm my-2">
@@ -101,6 +113,7 @@
                     <td colspan="7" class="text-center">No Detail TOur Available</td>
                 </tr>
                 @endforelse
+                @endif
             </tbody>
         </table>
     </div>

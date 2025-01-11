@@ -27,4 +27,9 @@ class TourDetail extends Model
     {
         return $this->belongsTo(MasterTour::class);
     }
+
+    function gallery()
+    {
+        return $this->hasMany(TourGallery::class, 'tour_detail_id', 'id');
+    }
 }
