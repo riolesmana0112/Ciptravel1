@@ -42,27 +42,54 @@
                     <th>Pickup Name</th>
                     <th>Map Location (longitude / latitude)</th>
                     <th>Facilities</th>
+                    <th>Itenaries</th>
                     <th>Gallery</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @if(count($data) > 0)
-                @forelse ($data as $tourDetail)
+                @foreach($data as $tourDetail)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $tourDetail[$loop->index]['masterTour']['product_name'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]['tour_title'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]['start_date'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]['end_date'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]['pickup'] }}</td>
-                    <td>{{ $tourDetail[$loop->index]['pickup_name'] }}</td>
+                    <td>{{ $tourDetail->tour->product_name }}</td>
+                    <td>{{ $tourDetail->tour_title }}</td>
+                    <td>{{ $tourDetail->start_date }}</td>
+                    <td>{{ $tourDetail->end_date }}</td>
+                    <td>{{ $tourDetail->pickup }}</td>
+                    <td>{{ $tourDetail->pickup_name }}</td>
                     <td>
-                        <a href="{{ $tourDetail[$loop->index]['map_location'] }}">
+                        <a href="{{ $tourDetail->map_location }}">
                             Link Map Location
                         </a>
                     </td>
-                    <td>{!! $tourDetail[$loop->index]['fasilities'] !!}</td>
+                    <td>{!! $tourDetail->fasilities !!}</td>
+                    <td>
+                        <form class="d-inline" 
+                            action="{{ route('itenary.store') }}" 
+                            method="POST"
+                            >
+                            @csrf
+                            <input type="hidden" name="tour_detail_id" value=" {{ $tourDetail->id }}"/>
+                            <textarea  name="description" id="description" class="form-control" required></textarea>
+                            @if(isset($errors->path))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->path as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            <button type="submit" class="btn btn-primary btn-sm my-2">
+                                Add Itenary
+                            </button>
+                        </form>
+                        <ol>
+                        @foreach ($tourDetail->itenary as $itenary)
+                            <li>{{ $itenary->description }}</li>
+                            @endforeach
+                        </ol>
+                    </td>
                     <td>
                         <form class="d-inline" 
                             action="{{ route('tour-gallery.store') }}" 
@@ -70,7 +97,7 @@
                             enctype="multipart/form-data"
                             >
                             @csrf
-                            <input type="hidden" name="tour_detail_id" value=" {{ $tourDetail[$loop->index]['id'] }}"/>
+                            <input type="hidden" name="tour_detail_id" value=" {{ $tourDetail->id }}"/>
                             <input type="file" name="path" id="path" class="form-control" required>
                             @if(isset($errors->path))
                             <div class="alert alert-danger">
@@ -86,16 +113,14 @@
                             </button>
                         </form>
                         
-                        @if(count($tourDetail[$loop->index]['gallery']) > 0)
                         <div class="flex">
-                            @foreach($tourDetail[$loop->index]['gallery'] as $gallery)
+                            @foreach ($tourDetail->gallery as $gallery)
                             <img class="img-thumbnail" src="{{ $gallery->path }}" width="100"/>
                             @endforeach
                         </div>
-                        @endif
                     </td>
                     <td>
-                        <a href="{{ route('tour-detail.edit', $tourDetail[$loop->index]['id']) }}" class="btn btn-primary btn-sm my-2">
+                        <a href="{{ route('tour-detail.edit', $tourDetail->id) }}" class="btn btn-primary btn-sm my-2">
                             <i class="bi bi-save"></i> Update
                         </a>
                         <form  
@@ -108,12 +133,7 @@
                         </form>
                     </td>
                 </tr>
-                @empty
-                <tr>
-                    <td colspan="7" class="text-center">No Detail TOur Available</td>
-                </tr>
-                @endforelse
-                @endif
+                @endforeach
             </tbody>
         </table>
     </div>

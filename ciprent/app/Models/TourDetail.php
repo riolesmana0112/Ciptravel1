@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TourDetail extends Model
 {
@@ -20,16 +22,22 @@ class TourDetail extends Model
         'description',
         'fasilities',
         'master_tour_id',
-        'days'
+        'days',
+        'price'
     ];
     
-    function masterTour()
+    function tour(): BelongsTo
     {
-        return $this->belongsTo(MasterTour::class);
+        return $this->belongsTo(MasterTour::class, 'master_tour_id', 'id')->select("id", "product_name");
     }
 
-    function gallery()
+    function gallery(): HasMany
     {
-        return $this->hasMany(TourGallery::class, 'tour_detail_id', 'id');
+        return self::hasMany(TourGallery::class);
+    }
+
+    function itenary(): HasMany
+    {
+        return self::hasMany(Itenary::class);
     }
 }

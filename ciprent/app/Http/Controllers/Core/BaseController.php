@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Core;
 
 use App\Http\Controllers\Controller;
+use App\Models\Itenary;
 use App\Models\User;
 use Illuminate\Auth\Authenticatable;
 use App\Models\MasterVehicle as ModelsMasterVehicle;
@@ -17,6 +18,11 @@ class BaseController extends Controller
 {
     use Authenticatable;
     
+    protected function itenary()
+    {
+        return new Itenary;
+    }
+
     protected function tourGallery()
     {
         return new TourGallery;

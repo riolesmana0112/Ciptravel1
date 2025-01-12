@@ -21,6 +21,7 @@ return new class extends Migration
                 $table->string('pickup_name');
                 $table->text('map_location');
                 $table->text('description');
+                $table->double('price');
                 $table->foreignUlid('master_tour_id')
                     ->references('id')
                     ->on('master_tours')

@@ -9,9 +9,11 @@ class TourDetailController extends BaseController
 {
     function index()
     {
-        $data = self::tourDetail()->with('masterTour', 'gallery')->get();
+        $data = self::tourDetail()
+        ->with('gallery', 'tour', 'itenary')
+        ->get();
         // return $data;
-        return self::validateAuth('master.tour.detail.index', compact('data'));
+        return view('master.tour.detail.index', compact('data'));
     }
 
     function create()
@@ -37,6 +39,7 @@ class TourDetailController extends BaseController
             'pickup_name' => 'required|string',
             'map_location' => 'required|string',
             'description' => 'required|string',
+            'price' => 'required|integer|min:6',
             'facilities' => 'required|string',
         ]);
 
@@ -51,6 +54,7 @@ class TourDetailController extends BaseController
             'map_location' => $request->map_location,
             'description' => $request->description,
             'fasilities' => $request->facilities,
+            'price' => $request->price,
             'master_tour_id' => $request->tour_id,
             'days' => $days
         ]);
@@ -67,6 +71,7 @@ class TourDetailController extends BaseController
             'pickup_name' => 'required|string',
             'map_location' => 'required|string',
             'description' => 'required|string',
+            'price' => 'required|integer|min:6',
             'facilities' => 'required|string',
         ]);
 
@@ -82,6 +87,7 @@ class TourDetailController extends BaseController
             'map_location' => $request->map_location,
             'description' => $request->description,
             'fasilities' => $request->facilities,
+            'price' => $request->price,
             'master_tour_id' => $request->tour_id,
             'days' => $days
         ]);

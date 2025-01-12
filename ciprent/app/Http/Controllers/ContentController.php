@@ -39,4 +39,10 @@ class ContentController extends BaseController
             !isset($data) ? 'no content available!' : 'content of pickup are founded!', 
             !isset($data) ? 404 : 200);
     }
+
+    function getTourData()
+    {
+        $data = self::tourDetail()->with('gallery', 'tour', 'itenary')->get();
+        return self::sendResponse($data, 'content of pickup are founded!');
+    }
 }

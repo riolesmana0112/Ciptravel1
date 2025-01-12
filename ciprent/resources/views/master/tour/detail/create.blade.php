@@ -102,6 +102,17 @@
                 value="{{ old('map_location') }}">
         </div>
         <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+                type="text"
+                name="price"
+                id="price"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ old('price') }}">
+        </div>
+        <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <input id="description" type="hidden" name="description" value="{{ old('description') }}"/>
             <trix-editor input="description"></trix-editor>

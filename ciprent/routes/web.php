@@ -11,6 +11,7 @@ use App\Http\Controllers\BopController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\ItenaryController;
 use App\Http\Controllers\MasterDropController;
 use App\Http\Controllers\MasterPickupController;
 use App\Http\Controllers\MasterPricelistController;
@@ -21,10 +22,11 @@ use App\Http\Controllers\TourGalleryController;
 
 Route::group([
     'prefix' => 'api'
-], function ($router) {
+], function () {
     Route::get('vehicle', [ContentController::class, 'listVehicle']);
     Route::get('pickup', [ContentController::class, 'pickupData']);
     Route::get('drop', [ContentController::class, 'dropData']);
+    Route::get('tour', [ContentController::class, 'getTourData']);
     Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
 });
 
@@ -54,6 +56,7 @@ Route::prefix('master')->group(function () {
     Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
 
     Route::post('/tour-gallery', [TourGalleryController::class, 'store'])->name('tour-gallery.store');
+    Route::post('/itenary', [ItenaryController::class, 'store'])->name('itenary.store');
 });
 
 // Employee
