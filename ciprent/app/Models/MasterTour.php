@@ -10,5 +10,5 @@ class MasterTour extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['product_name'];
+    protected $fillable = ['product_name', 'product_type'];
 }

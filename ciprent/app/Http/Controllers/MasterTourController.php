@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Core\BaseController;
 
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class MasterTourController extends BaseController
      */
     public function index()
     {
-        $data = self::masterTour()->all(); 
+        $data = self::masterTour()->all();
         return self::validateAuth('master.tour.index', $data);
     }
 
@@ -30,11 +31,13 @@ class MasterTourController extends BaseController
     public function store(Request $request)
     {
         $request->validate([
-            'product_name' => 'required|string|max:255'
+            'product_name' => 'required|string|max:255',
+            'product_type' => 'required|string|in:Domestik Luxury,Domestik Non Luxury,Non Domestik',
         ]);
 
         self::masterTour()->create([
             'product_name' => $request->product_name,
+            'product_type' => $request->product_type
         ]);
 
         return redirect()->route('tour.index')->with('status', 'Master Tour Has been Added!');

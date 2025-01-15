@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('master_tours', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('product_name'); // Open Trip & Private Tour
+            $table->string('product_type'); // Domestik Luxury, Domestik Non Luxury, Non Domestik
             $table->timestamps();
         });
     }

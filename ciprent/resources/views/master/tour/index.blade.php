@@ -46,6 +46,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Product Name</th>
+                    <th>Product Type</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -55,6 +56,9 @@
                     <td>{{ $loop->index + 1 }}</td>
                     <td>
                         {{ $car->product_name }}
+                    </td>
+                    <td>
+                        {{ $car->product_type }}
                     </td>
                     <td class="text-center">
                         <!-- Save Button -->
