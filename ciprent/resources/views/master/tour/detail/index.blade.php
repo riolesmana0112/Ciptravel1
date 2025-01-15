@@ -51,7 +51,7 @@
                 @foreach($data as $tourDetail)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $tourDetail->tour->product_name }}</td>
+                    <td>{{ $tourDetail->tour->product_name }} | {{ $tourDetail->tour->product_type }}</td>
                     <td>{{ $tourDetail->tour_title }}</td>
                     <td>{{ $tourDetail->start_date }}</td>
                     <td>{{ $tourDetail->end_date }}</td>

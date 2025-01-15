@@ -29,7 +29,7 @@
                 autocomplete="off">
                 @forelse ($data as $tourType )
                 <option value="{{ $tourType->id }}"  
-                >{{ $tourType->product_name }} </option>
+                >{{ $tourType->product_name }} | {{ $tourType->product_type }}</option>
                 @empty
                 <option value="">Choose Vehicle </option>
                 @endforelse
