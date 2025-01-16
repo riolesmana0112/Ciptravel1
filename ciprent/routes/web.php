@@ -65,8 +65,8 @@ Route::prefix('master')->group(function () {
     Route::resource('/space-addon', SpaceAddonController::class);
     Route::resource('/space-detail', SpaceDetailController::class);
 
-    Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('tour-gallery.store');
-    Route::post('/space-itenary', [SpaceItenaryController::class, 'store'])->name('itenary.store');
+    Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('space-gallery.store');
+    Route::post('/space-itenary', [SpaceItenaryController::class, 'store'])->name('space-itenary.store');
 });
 
 // Employee

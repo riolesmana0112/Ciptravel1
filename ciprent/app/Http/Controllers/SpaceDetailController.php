@@ -35,11 +35,11 @@ class SpaceDetailController extends BaseController
             'location' => 'required|string',
             'google_location' => 'required|string',
             'description' => 'required|string',
-            'facilities' => 'required|string',
-            'min_pax' => 'required|string',
-            'max_pax' => 'required|string',
+            'fasilities' => 'required|string',
+            'min_pax' => 'required|integer',
+            'max_pax' => 'required|integer',
             'available' => 'required|boolean',
-            'days' => 'required|integer',
+            'days' => 'required|integer|max:30000',
             'price' => 'required|integer|min:6',
         ]);
 
@@ -48,7 +48,7 @@ class SpaceDetailController extends BaseController
             'location' => $request->location,
             'google_location' => $request->google_location,
             'description' => $request->description,
-            'facilities' => $request->facilities,
+            'fasilities' => $request->fasilities,
             'min_pax' => $request->min_pax,
             'max_pax' => $request->max_pax,
             'available' => $request->available,
@@ -65,11 +65,11 @@ class SpaceDetailController extends BaseController
             'location' => 'required|string',
             'google_location' => 'required|string',
             'description' => 'required|string',
-            'facilities' => 'required|string',
-            'min_pax' => 'required|string',
-            'max_pax' => 'required|string',
+            'fasilities' => 'required|string',
+            'min_pax' => 'required|integer',
+            'max_pax' => 'required|integer',
             'available' => 'required|boolean',
-            'days' => 'required|integer',
+            'days' => 'required|integer|max:30000',
             'price' => 'required|integer|min:6',
         ]);
 
@@ -79,7 +79,7 @@ class SpaceDetailController extends BaseController
             'location' => $request->location,
             'google_location' => $request->google_location,
             'description' => $request->description,
-            'facilities' => $request->facilities,
+            'fasilities' => $request->fasilities,
             'min_pax' => $request->min_pax,
             'max_pax' => $request->max_pax,
             'available' => $request->available,
@@ -87,5 +87,11 @@ class SpaceDetailController extends BaseController
             'price' => $request->price
         ]);
         return redirect()->route('space-detail.index')->with('success', 'Data berhasil diubah');
+    }
+
+    function destroy($id)
+    {
+        self::spaceDetail()->find($id)->delete();
+        return redirect()->route('space-detail.index')->with('success', 'Data berhasil dihapus');
     }
 }

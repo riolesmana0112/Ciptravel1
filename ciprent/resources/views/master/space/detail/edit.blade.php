@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container p-4">
-    <h1 class="mb-4">Update Tour Data Data</h1>
+    <h1 class="mb-4">Update Space Data</h1>
 
     @if($errors->any())
     <div class="alert alert-danger">
@@ -15,106 +15,53 @@
     </div>
     @endif
 
-    <form 
-     action="{{ route('tour-detail.update', $data->id) }}"
+    <form
+     action="{{ route('space-detail.update', $data->id) }}"
         method="POST">
         @method('PUT')
         @csrf
         <div class="mb-3">
-            <label for="tour_id" class="form-label">Choose Tour Type</label>
-            <select
-                name="tour_id"
-                class="form-control"
-                id="tour_id"
-                required
-                autocomplete="off">
-                @forelse ($tourType as $tourType )
-                <option 
-                {{ $data->tour->id == $tourType->id ? 'selected' : '' }}
-                value="{{ $tourType->id }}">
-                {{ $tourType->product_name }} | {{ $tourType->product_type }} 
-            </option>
-                @empty
-                <option value="">Choose Toure Type </option>
-                @endforelse
-            </select>
+            <label class="form-label">Available:</label>
+            <input type="radio" id="available_yes" name="available" value="1" 
+                   {{ $data->available == 1 ? 'checked' : '' }}>
+            <label for="available_yes" class="form-label">Yes</label>
+            <input type="radio" id="available_no" name="available" value="0" 
+                   {{ $data->available == 0 ? 'checked' : '' }}>
+            <label for="available_no" class="form-label">No</label>
         </div>
+        
         <div class="mb-3">
-            <label for="tour_title" class="form-label">Tour Title</label>
+            <label for="space_title" class="form-label">Space Title</label>
             <input
                 type="text"
-                name="tour_title"
-                id="tour_title"
+                name="space_title"
+                id="space_title"
                 class="form-control"
                 required
                 autocomplete="off"
-                value="{{ $data->tour_title }}">
+                value="{{ $data->space_title }}">
         </div>
         <div class="mb-3">
-            <label for="start_date" class="form-label">Start Date</label>
-            <input
-                type="date"
-                name="start_date"
-                id="start_date"
-                class="form-control"
-                required
-                autocomplete="off"
-                value="{{ $data->start_date }}">
-        </div>
-        <div class="mb-3">
-            <label for="end_date" class="form-label">End Date</label>
-            <input
-                type="date"
-                name="end_date"
-                id="end_date"
-                class="form-control"
-                required
-                autocomplete="off"
-                value="{{ $data->end_date }}">
-        </div>
-        <div class="mb-3">
-            <label for="pickup" class="form-label">Pickup</label>
+            <label for="location" class="form-label">Location</label>
             <input
                 type="text"
-                name="pickup"
-                id="pickup"
+                name="location"
+                id="location"
                 class="form-control"
                 required
                 autocomplete="off"
-                value="{{ $data->pickup }}">
+                value="{{ $data->location }}">
         </div>
         <div class="mb-3">
-            <label for="pickup_name" class="form-label">Pickup Name</label>
+            <label for="google_location" class="form-label">Google Map Location</label>
             <input
                 type="text"
-                name="pickup_name"
-                id="pickup_name"
+                name="google_location"
+                id="google_location"
                 class="form-control"
                 required
                 autocomplete="off"
-                value="{{ $data->pickup_name }}">
-        </div>
-        <div class="mb-3">
-            <label for="map_location" class="form-label">Map Location</label>
-            <input
-                type="text"
-                name="map_location"
-                id="map_location"
-                class="form-control"
-                required
-                autocomplete="off"
-                value="{{ $data->map_location }}">
-        </div>
-        <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input
-                type="text"
-                name="price"
-                id="price"
-                class="form-control"
-                required
-                autocomplete="off"
-                value="{{ $data->price }}">
+                value="{{ $data->google_location }}">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -122,14 +69,58 @@
             <trix-editor input="description"></trix-editor>
         </div>
         <div class="mb-3">
-            <label for="facilities" class="form-label">Fasilities</label>
-            <input id="x" type="hidden" name="facilities" value="{{ $data->fasilities }}">
+            <label for="fasilities" class="form-label">Fasilities</label>
+            <input id="x" type="hidden" name="fasilities" value="{{ $data->fasilities }}">
             <trix-editor input="x"></trix-editor>
+        </div>
+        <div class="mb-3">
+            <label for="min_pax" class="form-label">Min Pax</label>
+            <input
+                type="text"
+                name="min_pax"
+                id="min_pax"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->min_pax }}">
+        </div>
+        <div class="mb-3">
+            <label for="max_pax" class="form-label">Max Pax</label>
+            <input
+                type="text"
+                name="max_pax"
+                id="max_pax"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->max_pax }}">
+        </div>
+        <div class="mb-3">
+            <label for="days" class="form-label">Days</label>
+            <input
+                type="number"
+                name="days"
+                id="days"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->days }}">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+                type="number"
+                name="price"
+                id="price"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->price }}">
         </div>
         <!-- Buttons for Back and Save -->
         <div class="d-flex justify-content-between">
             <!-- Back button (red) -->
-            <a href="{{ route('tour-detail.index') }}" class="btn btn-danger btn-lg">
+            <a href="{{ route('space-detail.index') }}" class="btn btn-danger btn-lg">
                 <i class="bi bi-arrow-left-circle"></i> Back
             </a>
             <!-- Save button (blue) -->

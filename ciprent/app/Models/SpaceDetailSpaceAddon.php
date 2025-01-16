@@ -12,6 +12,6 @@ class SpaceDetailSpaceAddon extends Model
 
     protected $fillable = [
         'space_detail_id',
-        'space_addon_id',
+        'space_addon_id'
     ];
 }
