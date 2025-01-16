@@ -63,11 +63,7 @@ Route::prefix('master')->group(function () {
     Route::post('/itenary', [ItenaryController::class, 'store'])->name('itenary.store');
 
     Route::resource('/space-addon', SpaceAddonController::class);
-    Route::get('/space-detail', [SpaceDetailController::class, 'index'])->name('tour-detail.index');
-    Route::get('/space-detail/create', [SpaceDetailController::class, 'create'])->name('tour-detail.create');
-    Route::post('/space-detail', [SpaceDetailController::class, 'store'])->name('tour-detail.store');
-    Route::get('/space-detail/{id}/edit', [SpaceDetailController::class, 'edit'])->name('tour-detail.edit');
-    Route::put('/space-detail/{id}', [SpaceDetailController::class, 'update'])->name('tour-detail.update');
+    Route::resource('/space-detail', SpaceDetailController::class);
 
     Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('tour-gallery.store');
     Route::post('/space-itenary', [SpaceItenaryController::class, 'store'])->name('itenary.store');

@@ -11,6 +11,10 @@ use App\Models\MaterDrop;
 use App\Models\MaterPickup;
 use App\Models\PriceList;
 use App\Models\MasterTour;
+use App\Models\SpaceAddon;
+use App\Models\SpaceDetail;
+use App\Models\SpaceGallery;
+use App\Models\SpaceItenary;
 use App\Models\TourDetail;
 use App\Models\TourGallery;
 
@@ -36,6 +40,26 @@ class BaseController extends Controller
     protected function masterTour()
     {
         return new MasterTour;
+    }
+
+    protected function spaceitenary()
+    {
+        return new SpaceItenary();
+    }
+
+    protected function spaceGallery()
+    {
+        return new SpaceGallery;
+    }
+
+    protected function spaceDetail()
+    {
+        return new SpaceDetail;
+    }
+
+    protected function spaceAddon()
+    {
+        return new SpaceAddon;
     }
 
     protected function pricelist()

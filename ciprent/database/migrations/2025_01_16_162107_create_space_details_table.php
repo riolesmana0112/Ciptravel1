@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('space_details', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('space_title');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->smallInteger('days');
             $table->string('location');
             $table->text('google_location');

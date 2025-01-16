@@ -14,8 +14,6 @@ class SpaceDetail extends Model
 
     protected $fillable = [
         'space_title',
-        'start_date',
-        'end_date',
         'location',
         'google_location',
         'description',
