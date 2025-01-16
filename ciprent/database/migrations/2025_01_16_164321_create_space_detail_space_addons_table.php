@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_spaces', function (Blueprint $table) {
-            $table->id();
+        Schema::create('space_detail_space_addons', function (Blueprint $table) {
+            $table->ulid("id")->primary();
+            $table->foreignUlid('space_detail_id')->references("id")->on('space_details');
+            $table->foreignUlid('space_addon_id')->references("id")->on('space_addons');
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_spaces');
+        Schema::dropIfExists('space_detail_space_addons');
     }
 };
