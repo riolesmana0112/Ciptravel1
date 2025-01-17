@@ -44,7 +44,7 @@
            Space Detail
         </a>
         <a href="{{ route("space-pricelist.index") }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
-           Space Price List
+           Space Product
         </a>
     </div>
     <div class="d-flex justify-content-center">

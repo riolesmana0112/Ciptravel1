@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('space_pricelists', function (Blueprint $table) {
             $table->ulid("id")->primary();
             $table->foreignUlid('space_detail_id')->references('id')->on('space_details')->onDelete('cascade');
-            $table->integer('price');
             $table->timestamps();
         });
     }

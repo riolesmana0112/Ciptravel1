@@ -4,7 +4,7 @@
 <div class="container">
     <!-- Page Header -->
     <div class="text-center mb-4">
-        <h1 class="display-4 fw-bold">Space Price List</h1>
+        <h1 class="display-4 fw-bold">Space Product</h1>
     </div>
 
     <!-- Display Validation Errors -->
@@ -34,7 +34,7 @@
         <!-- Other Buttons -->
         <div class="d-flex gap-3">
             <a href="{{ route('space-pricelist.create') }}" class="btn btn-success btn-lg">
-                <i class="bi bi-car-front-fill"></i> Add New Price List
+                <i class="bi bi-car-front-fill"></i> Add New Product
             </a>
         </div>
     </div>
@@ -46,9 +46,7 @@
                 <tr>
                     <th>No.</th>
                     <th>Space Title</th>
-                    <th>Space Price</th>
                     <th>Space Addon</th>
-                    <th>Total Price</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -57,13 +55,11 @@
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $pricelist->detail->location }} - {{ $pricelist->detail->space_title }}</td>
-                    <td>{{ $pricelist->detail->price }}</td>
                     <td>
                         @foreach ($pricelist->addon as $addon)
                         {{ $addon->addon_title }} - {{ $addon->price }}<br>    
                         @endforeach
                     </td>
-                    <td>{{ $pricelist->price }}</td>
                     <td class="text-center">
                         <!-- Save Button -->
                         <a href="{{ route('space-pricelist.edit', $pricelist->id) }}" class="btn btn-primary btn-sm">

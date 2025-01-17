@@ -36,24 +36,16 @@ class SpacePricelistController extends BaseController
             'addons' => 'nullable|array',
         ]);
         
-        $detail = self::spaceDetail()->find($request->space_detail_id);
-
-        $addons = $request->addons ? self::spaceAddon()->whereIn('id', $request->addons)->get() : collect([]);
-
-        $addonsPrice = $addons->sum('price');
-
-        $totalPrice = $detail->price + $addonsPrice;
 
         $priceList = self::spacePriceList()->create([
             'space_detail_id' => $request->space_detail_id,
-            'price' => $totalPrice,
         ]);
 
-        if ($addons->isNotEmpty()) {
+        if ($request->addons) {
             $priceList->addon()->sync($request->addons);
         }
 
-        return redirect()->route('space-pricelist.index')->with('success', 'Data berhasil disimpan');
+        return redirect()->route('space-pricelist.index')->with('success', 'successfully saved');
     }
 
     /**
@@ -80,7 +72,21 @@ class SpacePricelistController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'space_detail_id' => 'required|exists:space_details,id',
+            'addons' => 'nullable|array',
+        ]);
+        
+        $pricelist = self::spacePriceList()->find($id);
+        $pricelist->update([
+            'space_detail_id' => $request->space_detail_id,
+        ]);
+
+        if ($request->addons) {
+            $pricelist->addon()->sync($request->addons);
+        }
+
+        return redirect()->route('space-pricelist.index')->with('success', 'successfully updated');
     }
 
     /**
@@ -89,6 +95,6 @@ class SpacePricelistController extends BaseController
     public function destroy(string $id)
     {
         self::spacePriceList()->find($id)->delete();
-        return redirect()->route('space-pricelist.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('space-pricelist.index')->with('success', 'successfully deleted');
     }
 }

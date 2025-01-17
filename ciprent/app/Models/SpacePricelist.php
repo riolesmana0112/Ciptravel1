@@ -12,7 +12,7 @@ class SpacePricelist extends Model
 {
     use HasFactory, HasUlids;
 
-    protected $fillable = ['space_detail_id', 'price'];
+    protected $fillable = ['space_detail_id'];
 
     function detail(): BelongsTo
     {
