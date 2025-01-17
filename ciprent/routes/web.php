@@ -21,6 +21,7 @@ use App\Http\Controllers\SpaceAddonController;
 use App\Http\Controllers\SpaceDetailController;
 use App\Http\Controllers\SpaceGalleryController;
 use App\Http\Controllers\SpaceItenaryController;
+use App\Http\Controllers\SpacePricelistController;
 use App\Http\Controllers\TourDetailController;
 use App\Http\Controllers\TourGalleryController;
 
@@ -64,6 +65,7 @@ Route::prefix('master')->group(function () {
 
     Route::resource('/space-addon', SpaceAddonController::class);
     Route::resource('/space-detail', SpaceDetailController::class);
+    Route::resource('/space-pricelist', SpacePricelistController::class);
 
     Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('space-gallery.store');
     Route::post('/space-itenary', [SpaceItenaryController::class, 'store'])->name('space-itenary.store');

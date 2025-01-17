@@ -35,11 +35,16 @@
         <a href="{{ route('tour-detail.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
            Tour Detail
         </a>
+    </div>
+    <div class="d-flex justify-content-center mb-4">
         <a href="{{ route('space-addon.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
             Space Addon
         </a>
         <a href="{{ route("space-detail.index") }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
            Space Detail
+        </a>
+        <a href="{{ route("space-pricelist.index") }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+           Space Price List
         </a>
     </div>
     <div class="d-flex justify-content-center">

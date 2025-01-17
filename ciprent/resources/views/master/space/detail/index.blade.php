@@ -30,7 +30,7 @@
 
     <!-- Car Details Table -->
     <div class="table-responsive shadow-sm rounded p-4">
-        <table class="table table-hover align-middle table-bordered">
+        <table class="table table-hover align-start table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>No.</th>

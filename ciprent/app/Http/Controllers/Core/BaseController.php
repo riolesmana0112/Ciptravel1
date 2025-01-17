@@ -12,75 +12,17 @@ use App\Models\MaterPickup;
 use App\Models\PriceList;
 use App\Models\MasterTour;
 use App\Models\SpaceAddon;
+use App\Models\SpaceAddonSpacePricelist;
 use App\Models\SpaceDetail;
 use App\Models\SpaceGallery;
 use App\Models\SpaceItenary;
+use App\Models\SpacePricelist;
 use App\Models\TourDetail;
 use App\Models\TourGallery;
 
 class BaseController extends Controller
 {
     use Authenticatable;
-    
-    protected function itenary()
-    {
-        return new Itenary;
-    }
-
-    protected function tourGallery()
-    {
-        return new TourGallery;
-    }
-
-    protected function tourDetail()
-    {
-        return new TourDetail;
-    }
-
-    protected function masterTour()
-    {
-        return new MasterTour;
-    }
-
-    protected function spaceitenary()
-    {
-        return new SpaceItenary();
-    }
-
-    protected function spaceGallery()
-    {
-        return new SpaceGallery;
-    }
-
-    protected function spaceDetail()
-    {
-        return new SpaceDetail;
-    }
-
-    protected function spaceAddon()
-    {
-        return new SpaceAddon;
-    }
-
-    protected function pricelist()
-    {
-        return new PriceList;
-    }
-
-    protected function pickup()
-    {
-        return new MaterPickup;
-    }
-
-    protected function drop()
-    {
-        return new MaterDrop;
-    }
-
-    protected function vehicle()
-    {
-        return new ModelsMasterVehicle;
-    }
 
     /**
      * success response method.
@@ -137,5 +79,75 @@ class BaseController extends Controller
     private function  user()
     {
         return new User;
+    }
+
+    protected function vehicle()
+    {
+        return new ModelsMasterVehicle;
+    }
+
+    protected function pickup()
+    {
+        return new MaterPickup;
+    }
+
+    protected function drop()
+    {
+        return new MaterDrop;
+    }
+
+    protected function itenary()
+    {
+        return new Itenary;
+    }
+
+    protected function tourGallery()
+    {
+        return new TourGallery;
+    }
+
+    protected function tourDetail()
+    {
+        return new TourDetail;
+    }
+
+    protected function masterTour()
+    {
+        return new MasterTour;
+    }
+
+    protected function spaceDetail()
+    {
+        return new SpaceDetail;
+    }
+
+    protected function spaceitenary()
+    {
+        return new SpaceItenary;
+    }
+
+    protected function spaceGallery()
+    {
+        return new SpaceGallery;
+    }
+
+    protected function spaceAddon()
+    {
+        return new SpaceAddon;
+    }
+
+    protected function spacePriceList()
+    {
+        return new SpacePricelist;
+    }
+
+    protected function spacePricelistAddon()
+    {
+        return new SpaceAddonSpacePricelist;
+    }
+
+    protected function pricelist()
+    {
+        return new PriceList;
     }
 }

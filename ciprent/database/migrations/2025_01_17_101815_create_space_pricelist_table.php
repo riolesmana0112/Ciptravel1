@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('space_detail_space_addons', function (Blueprint $table) {
+        Schema::create('space_pricelists', function (Blueprint $table) {
             $table->ulid("id")->primary();
-            $table->foreignUlid('space_detail_id')->references("id")->on('space_details');
-            $table->foreignUlid('space_addon_id')->references("id")->on('space_addons');
+            $table->foreignUlid('space_detail_id')->references('id')->on('space_details')->onDelete('cascade');
+            $table->integer('price');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('space_detail_space_addons');
+        Schema::dropIfExists('space_pricelist');
     }
 };

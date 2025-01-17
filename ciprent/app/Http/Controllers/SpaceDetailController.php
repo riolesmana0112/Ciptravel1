@@ -10,22 +10,20 @@ class SpaceDetailController extends BaseController
     function index()
     {
         $data = self::spaceDetail()
-            ->with('addon', 'gallery', 'itenary')
+            ->with('gallery', 'itenary')
             ->get();
         return view('master.space.detail.index', compact('data'));
     }
 
     function create()
     {
-        $data = self::spaceAddon()->all();
-        return view('master.space.detail.create', compact('data'));
+        return view('master.space.detail.create');
     }
 
     function edit($id)
     {
-        $data = self::spaceDetail()->with('addon')->find($id);
-        $addonSpace = self::spaceAddon()->all();
-        return view('master.space.detail.edit', compact('data', 'addonSpace'));
+        $data = self::spaceDetail()->find($id);
+        return view('master.space.detail.edit', compact('data'));
     }
 
     function store(Request $request)

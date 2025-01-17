@@ -25,11 +25,6 @@ class SpaceDetail extends Model
         'price'
     ];
 
-    public function addon(): BelongsToMany
-    {
-        return $this->belongsToMany(SpaceAddon::class, 'space_detail_space_addons');
-    }
-
     function gallery(): HasMany
     {
         return self::hasMany(SpaceGallery::class);
