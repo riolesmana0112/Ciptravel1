@@ -42,10 +42,26 @@ class ContentController extends BaseController
         );
     }
 
+    function getTourType()
+    {
+        $data = self::masterTour()->get();
+        return self::sendResponse($data, 'content of tour type are founded!');
+    }
+
     function getTourData()
     {
-        $data = self::tourDetail()->with('gallery', 'tour', 'itenary')->get();
-        return self::sendResponse($data, 'content of pickup are founded!');
+        $data = self::tourDetail()->with('gallery', 'itenary')->get();
+        return self::sendResponse($data, 'content of tour detail are founded!');
+    }
+
+    function getTourProduct($masterTourId, $tourDetailId)
+    {
+        $data = self::tourProduct()->where(['master_tour_id', '=', $masterTourId, 'tour_detail_id', '=', $tourDetailId])->first();
+        return self::sendResponse(
+            $data ? $data : [],
+            $data ? 'content of tour product are founded!' : 'no content available!',
+            $data ? 200 : 404
+        );
     }
 
     function getSpaceData()
@@ -61,21 +77,21 @@ class ContentController extends BaseController
     }
 
     public function getSpaceProduct($space_detail_id, $addons)
-    {   
+    {
         $addonsArray = explode(',', $addons);
 
         $query = self::spacePricelist()->where('space_detail_id', '=', $space_detail_id);
-        
+
         if (!empty($addonsArray)) {
             $query->whereHas('addon', function ($addon) use ($addonsArray) {
                 $addon->whereIn('id', $addonsArray);
             }, '=', count($addonsArray));
         }
-        
+
         $priceList = $query->with('detail', 'addon')->first();
 
         return self::sendResponse(
-            $priceList ? $priceList : [], 
+            $priceList ? $priceList : [],
             $priceList ? 'content of space product are founded!' : 'no content available!',
             $priceList ? 200 : 404
         );
