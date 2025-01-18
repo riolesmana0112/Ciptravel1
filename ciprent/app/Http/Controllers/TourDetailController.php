@@ -10,7 +10,7 @@ class TourDetailController extends BaseController
     function index()
     {
         $data = self::tourDetail()
-        ->with('gallery', 'tour', 'itenary')
+        ->with('gallery', 'itenary')
         ->get();
         // return $data;
         return view('master.tour.detail.index', compact('data'));
@@ -18,15 +18,13 @@ class TourDetailController extends BaseController
 
     function create()
     {
-        $data = self::masterTour()->all();
-        return view('master.tour.detail.create', compact('data'));
+        return view('master.tour.detail.create');
     }
 
     function edit($id)
     {
-        $data = self::tourDetail()->with('tour')->find($id);
-        $tourType = self::masterTour()->all();
-        return view('master.tour.detail.edit', compact('data', 'tourType'));
+        $data = self::tourDetail()->find($id);
+        return view('master.tour.detail.edit', compact('data'));
     }
 
     function update(Request $request, $id)
@@ -55,7 +53,6 @@ class TourDetailController extends BaseController
             'description' => $request->description,
             'fasilities' => $request->facilities,
             'price' => $request->price,
-            'master_tour_id' => $request->tour_id,
             'days' => $days
         ]);
         return redirect()->route('tour-detail.index')->with('success', 'Data berhasil diubah');
@@ -88,7 +85,6 @@ class TourDetailController extends BaseController
             'description' => $request->description,
             'fasilities' => $request->facilities,
             'price' => $request->price,
-            'master_tour_id' => $request->tour_id,
             'days' => $days
         ]);
         return redirect()->route('tour-detail.index')->with('success', 'Data berhasil disimpan');

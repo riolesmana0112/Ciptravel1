@@ -35,6 +35,9 @@
         <a href="{{ route('tour-detail.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
            Tour Detail
         </a>
+        <a href="{{ route('tour-product.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">
+           Tour Product
+        </a>
     </div>
     <div class="d-flex justify-content-center mb-4">
         <a href="{{ route('space-addon.index') }}" class="btn btn-lg btn-primary mx-3 d-flex align-items-center justify-content-center">

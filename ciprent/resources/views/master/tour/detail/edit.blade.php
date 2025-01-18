@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container p-4">
-    <h1 class="mb-4">Update Tour Data Data</h1>
+    <h1 class="mb-4">Update Tour Data</h1>
 
     @if($errors->any())
     <div class="alert alert-danger">
@@ -20,25 +20,6 @@
         method="POST">
         @method('PUT')
         @csrf
-        <div class="mb-3">
-            <label for="tour_id" class="form-label">Choose Tour Type</label>
-            <select
-                name="tour_id"
-                class="form-control"
-                id="tour_id"
-                required
-                autocomplete="off">
-                @forelse ($tourType as $tourType )
-                <option 
-                {{ $data->tour->id == $tourType->id ? 'selected' : '' }}
-                value="{{ $tourType->id }}">
-                {{ $tourType->product_name }} | {{ $tourType->product_type }} 
-            </option>
-                @empty
-                <option value="">Choose Toure Type </option>
-                @endforelse
-            </select>
-        </div>
         <div class="mb-3">
             <label for="tour_title" class="form-label">Tour Title</label>
             <input
