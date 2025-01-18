@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CarController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\BopController;
@@ -24,6 +24,7 @@ use App\Http\Controllers\SpaceItenaryController;
 use App\Http\Controllers\SpacePricelistController;
 use App\Http\Controllers\TourDetailController;
 use App\Http\Controllers\TourGalleryController;
+use App\Http\Controllers\TourProductController;
 
 Route::group([
     'prefix' => 'api'
@@ -31,15 +32,20 @@ Route::group([
     Route::get('vehicle', [ContentController::class, 'listVehicle']);
     Route::get('pickup', [ContentController::class, 'pickupData']);
     Route::get('drop', [ContentController::class, 'dropData']);
-    Route::get('tour', [ContentController::class, 'getTourData']);
     Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
+    Route::get('tour', [ContentController::class, 'getTourData']);
+    Route::get('tour-type', [ContentController::class, 'getTourType']);
+    Route::get('tour-product/{masterTourId}/{tourDetailId}', [ContentController::class, 'getTourProduct']);
+    Route::get('space', [ContentController::class, 'getSpaceData']);
+    Route::get('space-addon', [ContentController::class, 'getSpaceAddon']);
+    Route::get('space-product/{space_detail_id}/{addons}', [ContentController::class, 'getSpaceProduct']);
 });
 
 Route::get('/', [AuthController::class, 'login'])->name('home');
 Route::post('/login', [AuthController::class, 'auth'])->name('login.process');
 Route::get('/welcome', [AuthController::class, 'index'])->name('welcome');
 
-// Logout
+// Logout   
 Route::post('/logout', function (Request $request) {
     $request->session()->flush();
     return redirect()->route('home');
@@ -59,16 +65,15 @@ Route::prefix('master')->group(function () {
     Route::post('/tour-detail', [TourDetailController::class, 'store'])->name('tour-detail.store');
     Route::get('/tour-detail/{id}/edit', [TourDetailController::class, 'edit'])->name('tour-detail.edit');
     Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
-
     Route::post('/tour-gallery', [TourGalleryController::class, 'store'])->name('tour-gallery.store');
     Route::post('/itenary', [ItenaryController::class, 'store'])->name('itenary.store');
+    Route::resource('/tour-product', TourProductController::class);
 
-    Route::resource('/space-addon', SpaceAddonController::class);
     Route::resource('/space-detail', SpaceDetailController::class);
-    Route::resource('/space-pricelist', SpacePricelistController::class);
-
     Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('space-gallery.store');
     Route::post('/space-itenary', [SpaceItenaryController::class, 'store'])->name('space-itenary.store');
+    Route::resource('/space-addon', SpaceAddonController::class);
+    Route::resource('/space-pricelist', SpacePricelistController::class);
 });
 
 // Employee

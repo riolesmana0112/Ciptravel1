@@ -30,11 +30,10 @@
 
     <!-- Car Details Table -->
     <div class="table-responsive shadow-sm rounded p-4">
-        <table class="table table-hover align-middle table-bordered">
+        <table class="table table-hover align-top table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>No.</th>
-                    <th>Product Type</th>
                     <th>title</th>
                     <th>Start Date</th>
                     <th>End Date</th>
@@ -51,7 +50,6 @@
                 @foreach($data as $tourDetail)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $tourDetail->tour->product_name }} | {{ $tourDetail->tour->product_type }}</td>
                     <td>{{ $tourDetail->tour_title }}</td>
                     <td>{{ $tourDetail->start_date }}</td>
                     <td>{{ $tourDetail->end_date }}</td>

@@ -22,11 +22,6 @@ return new class extends Migration
                 $table->text('map_location');
                 $table->text('description');
                 $table->double('price');
-                $table->foreignUlid('master_tour_id')
-                    ->references('id')
-                    ->on('master_tours')
-                    ->onDelete('cascade')
-                    ->onUpdate('cascade');
                 $table->text('fasilities');
                 $table->timestamps();
         });

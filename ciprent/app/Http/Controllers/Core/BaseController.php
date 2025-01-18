@@ -19,6 +19,7 @@ use App\Models\SpaceItenary;
 use App\Models\SpacePricelist;
 use App\Models\TourDetail;
 use App\Models\TourGallery;
+use App\Models\TourProduct;
 
 class BaseController extends Controller
 {
@@ -114,6 +115,11 @@ class BaseController extends Controller
     protected function masterTour()
     {
         return new MasterTour;
+    }
+
+    protected function tourProduct()
+    {
+        return new TourProduct;
     }
 
     protected function spaceDetail()
