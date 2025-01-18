@@ -18,6 +18,7 @@ class PriceList extends Model
         return self::hasOne(MasterVehicle::class, 'id', 'vehicle_id')->select('id', 'vehicle_type', 'vehicle_name', 'vehicle_picture');
     }
 
+
     function drop_point(): HasOne
     {
         return self::hasOne(MaterDrop::class, 'id', 'driop_id')->select('id', 'drop_name', 'alias');
@@ -27,5 +28,4 @@ class PriceList extends Model
     {
         return self::hasOne(MaterPickup::class, 'id', 'pickup_id')->select('id', 'pickup_name', 'alias');
     }
-    
 }

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container p-3">
+<div class="container">
     <!-- Page Header -->
     <div class="text-center mb-4">
-        <h1 class="display-4 fw-bold">Master Tour Data</h1>
+        <h1 class="display-4 fw-bold">Space Product</h1>
     </div>
 
     <!-- Display Validation Errors -->
@@ -33,39 +33,39 @@
 
         <!-- Other Buttons -->
         <div class="d-flex gap-3">
-            <a href="{{ route('tour.create') }}" class="btn btn-success btn-lg">
-                <i class="bi bi-car-front-fill"></i> Add New Tour Product
+            <a href="{{ route('space-pricelist.create') }}" class="btn btn-success btn-lg">
+                <i class="bi bi-car-front-fill"></i> Add New Product
             </a>
         </div>
     </div>
 
     <!-- Car Details Table -->
-    <div class="table-responsive shadow-sm rounded">
+    <div class="table-responsive shadow-sm rounded p-4">
         <table class="table table-hover align-middle table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th>No.</th>
-                    <th>Product Name</th>
-                    <th>Product Type</th>
-                    <th>Actions</th>
+                    <th>Space Title</th>
+                    <th>Space Addon</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($data as $car)
+                @forelse ($data as $pricelist)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
+                    <td>{{ $pricelist->detail->location }} - {{ $pricelist->detail->space_title }}</td>
                     <td>
-                        {{ $car->product_name }}
-                    </td>
-                    <td>
-                        {{ $car->product_type }}
+                        @foreach ($pricelist->addon as $addon)
+                        {{ $addon->addon_title }} - {{ $addon->price }}<br>    
+                        @endforeach
                     </td>
                     <td class="text-center">
                         <!-- Save Button -->
-                        <a href="{{ route('vehicle.edit', $car->id) }}" class="btn btn-primary btn-sm">
-                            <i class="bi bi-save"></i> Upadate
+                        <a href="{{ route('space-pricelist.edit', $pricelist->id) }}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-save"></i> Update
                         </a>
-                        <form action="{{ route('vehicle.destroy', $car->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this car?');">
+                        <form action="{{ route('space-pricelist.destroy', $pricelist->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this car?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
@@ -76,7 +76,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">No Product Tour Available</td>
+                    <td colspan="7" class="text-center">No pricelist Available</td>
                 </tr>
                 @endforelse
             </tbody>

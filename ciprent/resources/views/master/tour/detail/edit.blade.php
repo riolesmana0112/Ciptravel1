@@ -30,9 +30,9 @@
                 autocomplete="off">
                 @forelse ($tourType as $tourType )
                 <option 
-                {{ $data->masterTour->id == $tourType->id ? 'selected' : '' }}
+                {{ $data->tour->id == $tourType->id ? 'selected' : '' }}
                 value="{{ $tourType->id }}">
-                {{ $tourType->product_name }} 
+                {{ $tourType->product_name }} | {{ $tourType->product_type }} 
             </option>
                 @empty
                 <option value="">Choose Toure Type </option>
@@ -104,6 +104,17 @@
                 required
                 autocomplete="off"
                 value="{{ $data->map_location }}">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+                type="text"
+                name="price"
+                id="price"
+                class="form-control"
+                required
+                autocomplete="off"
+                value="{{ $data->price }}">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>

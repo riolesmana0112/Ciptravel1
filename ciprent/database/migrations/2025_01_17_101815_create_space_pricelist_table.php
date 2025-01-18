@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('master_tours', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->string('product_name'); // Open Trip & Private Tour
-            $table->string('product_type'); // Domestik Luxury, Domestik Non Luxury, Non Domestik
+        Schema::create('space_pricelists', function (Blueprint $table) {
+            $table->ulid("id")->primary();
+            $table->foreignUlid('space_detail_id')->references('id')->on('space_details')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('master_tours');
+        Schema::dropIfExists('space_pricelist');
     }
 };

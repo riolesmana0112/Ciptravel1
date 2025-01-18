@@ -24,7 +24,7 @@ class TourDetailController extends BaseController
 
     function edit($id)
     {
-        $data = self::tourDetail()->with('masterTour')->find($id);
+        $data = self::tourDetail()->with('tour')->find($id);
         $tourType = self::masterTour()->all();
         return view('master.tour.detail.edit', compact('data', 'tourType'));
     }

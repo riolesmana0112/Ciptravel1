@@ -28,7 +28,7 @@ class TourDetail extends Model
     
     function tour(): BelongsTo
     {
-        return $this->belongsTo(MasterTour::class, 'master_tour_id', 'id')->select("id", "product_name");
+        return $this->belongsTo(MasterTour::class, 'master_tour_id', 'id')->select("id", "product_name", "product_type");
     }
 
     function gallery(): HasMany
