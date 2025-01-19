@@ -42,21 +42,21 @@ class ContentController extends BaseController
         );
     }
 
+    function getTourData()
+    {
+        $data = self::tourDetail()->with('type', 'gallery', 'itenary')->get();
+        return self::sendResponse($data, 'content of tour detail are founded!');
+    }
+
     function getTourType()
     {
         $data = self::masterTour()->get();
         return self::sendResponse($data, 'content of tour type are founded!');
     }
 
-    // function getTourData()
-    // {
-    //     $data = self::tourDetail()->with('gallery', 'itenary')->get();
-    //     return self::sendResponse($data, 'content of tour detail are founded!');
-    // }
-
-    function getTourProduct()
+    function getTourProduct($id)
     {
-        $data = self::tourProduct()->with('type', 'detail')->get();
+        $data = self::tourDetail()->findOrFail($id);
         return self::sendResponse(
             $data,
             'content of tour product are founded!'

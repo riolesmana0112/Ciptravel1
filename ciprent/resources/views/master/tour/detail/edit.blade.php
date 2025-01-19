@@ -21,6 +21,21 @@
         @method('PUT')
         @csrf
         <div class="mb-3">
+            <label for="master_tour_id" class="form-label">Choose Tour Type</label>
+            <select
+                name="master_tour_id"
+                class="form-control"
+                id="master_tour_id"
+                required
+                autocomplete="off">
+                @forelse ($type as $t)
+                <option value="{{ $t->id }}">{{ $t->product_name }} - {{ $t->product_type }} </option>
+                @empty
+                <option value="">Choose Tour Type</option>
+                @endforelse
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="tour_title" class="form-label">Tour Title</label>
             <input
                 type="text"

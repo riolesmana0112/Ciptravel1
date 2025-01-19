@@ -117,11 +117,6 @@ class BaseController extends Controller
         return new MasterTour;
     }
 
-    protected function tourProduct()
-    {
-        return new TourProduct;
-    }
-
     protected function spaceDetail()
     {
         return new SpaceDetail;
