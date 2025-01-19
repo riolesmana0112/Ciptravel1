@@ -42,25 +42,24 @@ class ContentController extends BaseController
         );
     }
 
-    function getTourType()
-    {
-        $data = self::masterTour()->get();
-        return self::sendResponse($data, 'content of tour type are founded!');
-    }
+    // function getTourType()
+    // {
+    //     $data = self::masterTour()->get();
+    //     return self::sendResponse($data, 'content of tour type are founded!');
+    // }
 
-    function getTourData()
-    {
-        $data = self::tourDetail()->with('gallery', 'itenary')->get();
-        return self::sendResponse($data, 'content of tour detail are founded!');
-    }
+    // function getTourData()
+    // {
+    //     $data = self::tourDetail()->with('gallery', 'itenary')->get();
+    //     return self::sendResponse($data, 'content of tour detail are founded!');
+    // }
 
-    function getTourProduct($masterTourId, $tourDetailId)
+    function getTourProduct()
     {
-        $data = self::tourProduct()->where(['master_tour_id', '=', $masterTourId, 'tour_detail_id', '=', $tourDetailId])->first();
+        $data = self::tourProduct()->with('type', 'detail')->get();
         return self::sendResponse(
-            $data ? $data : [],
-            $data ? 'content of tour product are founded!' : 'no content available!',
-            $data ? 200 : 404
+            $data,
+            'content of tour product are founded!'
         );
     }
 
