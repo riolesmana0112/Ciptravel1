@@ -23,6 +23,7 @@ return new class extends Migration
                 $table->text('description');
                 $table->double('price');
                 $table->text('fasilities');
+                $table->foreignUlid('master_tour_id')->references('id')->on('master_tours')->onDelete('cascade');
                 $table->timestamps();
         });
     }

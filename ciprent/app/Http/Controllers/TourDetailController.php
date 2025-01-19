@@ -10,21 +10,23 @@ class TourDetailController extends BaseController
     function index()
     {
         $data = self::tourDetail()
-        ->with('gallery', 'itenary')
+        ->with('type', 'gallery', 'itenary')
         ->get();
-        // return $data;
+
         return view('master.tour.detail.index', compact('data'));
     }
 
     function create()
     {
-        return view('master.tour.detail.create');
+        $type = self::masterTour()->select('id', 'product_name', 'product_type')->get();
+        return view('master.tour.detail.create', compact('type'));
     }
 
     function edit($id)
     {
-        $data = self::tourDetail()->find($id);
-        return view('master.tour.detail.edit', compact('data'));
+        $type = self::masterTour()->select('id', 'product_name', 'product_type')->get();
+        $data = self::tourDetail()->with('type', 'gallery', 'itenary')->find($id);
+        return view('master.tour.detail.edit', compact('data', 'type'));
     }
 
     function update(Request $request, $id)
@@ -39,6 +41,7 @@ class TourDetailController extends BaseController
             'description' => 'required|string',
             'price' => 'required|integer|min:6',
             'facilities' => 'required|string',
+            'master_tour_id' => 'required|exists:master_tours,id',
         ]);
 
         $days = (strtotime($request->end_date) - strtotime($request->start_date)) / (60 * 60 * 24);
@@ -53,9 +56,10 @@ class TourDetailController extends BaseController
             'description' => $request->description,
             'fasilities' => $request->facilities,
             'price' => $request->price,
-            'days' => $days
+            'days' => $days,
+            'master_tour_id' => $request->master_tour_id
         ]);
-        return redirect()->route('tour-detail.index')->with('success', 'Data berhasil diubah');
+        return redirect()->route('tour-detail.index')->with('success', 'Data Successfully Updated');
     }
 
     function store(Request $request)
@@ -70,6 +74,7 @@ class TourDetailController extends BaseController
             'description' => 'required|string',
             'price' => 'required|integer|min:6',
             'facilities' => 'required|string',
+            'master_tour_id' => 'required|exists:master_tours,id',
         ]);
 
         $days = (strtotime($request->end_date) - strtotime($request->start_date)) / (60 * 60 * 24);
@@ -85,8 +90,15 @@ class TourDetailController extends BaseController
             'description' => $request->description,
             'fasilities' => $request->facilities,
             'price' => $request->price,
-            'days' => $days
+            'days' => $days,
+            'master_tour_id' => $request->master_tour_id
         ]);
-        return redirect()->route('tour-detail.index')->with('success', 'Data berhasil disimpan');
+        return redirect()->route('tour-detail.index')->with('success', 'Data Successfully Created');
+    }
+
+    function destroy($id)
+    {
+        self::tourDetail()->find($id)->delete();
+        return redirect()->route('tour-detail.index')->with('success', 'Data Successfully Deleted');
     }
 }

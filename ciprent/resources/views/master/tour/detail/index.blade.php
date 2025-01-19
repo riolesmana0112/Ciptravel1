@@ -35,6 +35,7 @@
                 <tr>
                     <th>No.</th>
                     <th>title</th>
+                    <th>Type</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Pickup</th>
@@ -50,7 +51,8 @@
                 @foreach($data as $tourDetail)
                 <tr class="bg-white">
                     <td>{{ $loop->index + 1 }}</td>
-                    <td>{{ $tourDetail->tour_title }}</td>
+                    <td>{{ $tourDetail->type->product_name }} - {{ $tourDetail->type->product_type }}</td>
+                    <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $tourDetail->start_date }}</td>
                     <td>{{ $tourDetail->end_date }}</td>
                     <td>{{ $tourDetail->pickup }}</td>
@@ -122,6 +124,7 @@
                             <i class="bi bi-save"></i> Update
                         </a>
                         <form  
+                        action="{{ route('tour-detail.destroy', $tourDetail->id) }}"
                         method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this car?');">
                             @csrf
                             @method('DELETE')

@@ -65,9 +65,9 @@ Route::prefix('master')->group(function () {
     Route::post('/tour-detail', [TourDetailController::class, 'store'])->name('tour-detail.store');
     Route::get('/tour-detail/{id}/edit', [TourDetailController::class, 'edit'])->name('tour-detail.edit');
     Route::put('/tour-detail/{id}', [TourDetailController::class, 'update'])->name('tour-detail.update');
+    Route::delete('/tour-detail/{id}', [TourDetailController::class, 'destroy'])->name('tour-detail.destroy');
     Route::post('/tour-gallery', [TourGalleryController::class, 'store'])->name('tour-gallery.store');
     Route::post('/itenary', [ItenaryController::class, 'store'])->name('itenary.store');
-    Route::resource('/tour-product', TourProductController::class);
 
     Route::resource('/space-detail', SpaceDetailController::class);
     Route::post('/space-gallery', [SpaceGalleryController::class, 'store'])->name('space-gallery.store');
