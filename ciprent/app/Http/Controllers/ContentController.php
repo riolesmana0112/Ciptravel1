@@ -42,11 +42,11 @@ class ContentController extends BaseController
         );
     }
 
-    // function getTourType()
-    // {
-    //     $data = self::masterTour()->get();
-    //     return self::sendResponse($data, 'content of tour type are founded!');
-    // }
+    function getTourType()
+    {
+        $data = self::masterTour()->get();
+        return self::sendResponse($data, 'content of tour type are founded!');
+    }
 
     // function getTourData()
     // {

@@ -33,8 +33,8 @@ Route::group([
     Route::get('pickup', [ContentController::class, 'pickupData']);
     Route::get('drop', [ContentController::class, 'dropData']);
     Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
-    // Route::get('tour', [ContentController::class, 'getTourData']);
-    // Route::get('tour-type', [ContentController::class, 'getTourType']);
+    // Route::get('tour', [ContentController::class, 'ggetTourData']);
+    Route::get('tour-type', [ContentController::class, 'getTourType']);
     Route::get('tour-product', [ContentController::class, 'getTourProduct']);
     Route::get('space', [ContentController::class, 'getSpaceData']);
     Route::get('space-addon', [ContentController::class, 'getSpaceAddon']);
