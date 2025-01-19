@@ -56,7 +56,7 @@ class ContentController extends BaseController
 
     function getTourProduct($id)
     {
-        $data = self::tourDetail()->findOrFail($id);
+        $data = self::tourDetail()->with('type', 'gallery', 'itenary')->findOrFail($id);
         return self::sendResponse(
             $data,
             'content of tour product are founded!'
