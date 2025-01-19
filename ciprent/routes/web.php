@@ -24,7 +24,6 @@ use App\Http\Controllers\SpaceItenaryController;
 use App\Http\Controllers\SpacePricelistController;
 use App\Http\Controllers\TourDetailController;
 use App\Http\Controllers\TourGalleryController;
-use App\Http\Controllers\TourProductController;
 
 Route::group([
     'prefix' => 'api'
@@ -33,9 +32,9 @@ Route::group([
     Route::get('pickup', [ContentController::class, 'pickupData']);
     Route::get('drop', [ContentController::class, 'dropData']);
     Route::get('pricelist/{vehicleId}/{pickupId}/{dropId}', [ContentController::class, 'getPrice']);
-    // Route::get('tour', [ContentController::class, 'ggetTourData']);
+    Route::get('tour', [ContentController::class, 'getTourData']);
     Route::get('tour-type', [ContentController::class, 'getTourType']);
-    Route::get('tour-product', [ContentController::class, 'getTourProduct']);
+    Route::get('tour-product/{id}', [ContentController::class, 'getTourProduct']);
     Route::get('space', [ContentController::class, 'getSpaceData']);
     Route::get('space-addon', [ContentController::class, 'getSpaceAddon']);
     Route::get('space-product/{space_detail_id}/{addons}', [ContentController::class, 'getSpaceProduct']);
