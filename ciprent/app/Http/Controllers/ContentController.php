@@ -64,7 +64,9 @@ class ContentController extends BaseController
 
     public function getSpaceProduct()
     {
-        $product = self::spacePricelist()->with('detail', 'addon')->get();
+        $product = self::spacePricelist()->with(['detail' => function ($query) {
+            $query->where('available', 1)->with(['gallery', 'itenary']);
+        }])->with('addon')->get();
         return self::sendResponse(
             $product,
             'content of space product are founded!'
