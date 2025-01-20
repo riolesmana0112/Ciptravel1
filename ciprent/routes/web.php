@@ -35,9 +35,7 @@ Route::group([
     Route::get('tour', [ContentController::class, 'getTourData']);
     Route::get('tour-type', [ContentController::class, 'getTourType']);
     Route::get('tour-product/{id}', [ContentController::class, 'getTourProduct']);
-    Route::get('space', [ContentController::class, 'getSpaceData']);
-    Route::get('space-addon', [ContentController::class, 'getSpaceAddon']);
-    Route::get('space-product/{space_detail_id}/{addons}', [ContentController::class, 'getSpaceProduct']);
+    Route::get('space-product', [ContentController::class, 'getSpaceProduct']);
 });
 
 Route::get('/', [AuthController::class, 'login'])->name('home');
