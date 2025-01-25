@@ -54,7 +54,7 @@ class BopController extends Controller
             'kepulangan' => $request->kepulangan,
             'harga' => preg_replace('/[^0-9]/', '', $request->harga), // Hilangkan format Rupiah
             'nomor_rekening' => $request->nomor_rekening,
-            'approval_status' => $request->has('approval_status'), // Ubah checkbox menjadi boolean
+            'approval_status' => $request->approval_status, // Ubah checkbox menjadi boolean
         ]);
 
         return redirect()->route('bop.index')->with('success', 'Data berhasil disimpan.');

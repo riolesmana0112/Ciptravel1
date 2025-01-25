@@ -54,7 +54,7 @@
                         <td>{{ $bop->nomor_rekening ?? '-' }}</td>
                         <td class="text-center">
                             <input type="checkbox" class="form-check-input"
-                                   {{ $bop->approval_status ? 'checked' : '' }}
+                                   {{ $bop->approval_status == 1 ? 'checked' : '' }}
                                    disabled 
                                    style="transform: scale(1.5); cursor: not-allowed;">
                         </td>
