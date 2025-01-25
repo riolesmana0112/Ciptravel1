@@ -10,7 +10,7 @@ class Bop extends Model
     use HasFactory;
 
     // Nama tabel di database
-    protected $table = 'bop';
+    protected $table = 'bops';
 
     // Jika ada kolom yang di-fillable
     protected $fillable = [
