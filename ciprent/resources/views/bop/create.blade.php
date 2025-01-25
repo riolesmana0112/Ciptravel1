@@ -67,7 +67,7 @@
         <div class="form-check mb-3">
             <!-- Input hidden untuk menangani checkbox yang tidak dicentang -->
             <input type="hidden" name="approval_status" value="0"> 
-            <input type="checkbox" class="form-check-input" id="approval_status" name="approval_status" value="1">
+            <input type="checkbox" class="form-check-input" id="approval_status" name="approval_status" >
             <label class="form-check-label" for="approval_status">Approved</label>
         </div>
 
