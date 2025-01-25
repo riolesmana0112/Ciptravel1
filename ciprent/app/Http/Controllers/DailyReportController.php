@@ -20,7 +20,7 @@ class DailyReportController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'tanggal' => 'required|date',
             'driver_name' => 'required|string|max:255',
             'jenis_kendaraan' => 'required|string|max:255',
@@ -30,7 +30,15 @@ class DailyReportController extends Controller
             'tujuan' => 'required|string|max:255',
         ]);
 
-        DailyReport::create($validatedData);
+        DailyReport::create([
+            'tanggal' => $request->tanggal,
+            'driver_name' => $request->driver_name,
+            'vehicle_type' => $request->jenis_kendaraan,
+            'plat_nomor' => $request->plat_nomor,
+            'keberangkatan' => $request->keberangkatan,
+            'kepulangan' => $request->kepulangan,
+            'tujuan' => $request->tujuan,
+        ]);
 
         return redirect()->route('daily_report.index')->with('success', 'Daily report created successfully!');
     }

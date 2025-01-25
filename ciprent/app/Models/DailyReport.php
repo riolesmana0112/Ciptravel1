@@ -12,7 +12,7 @@ class DailyReport extends Model
     protected $fillable = [
         'tanggal', 
         'driver_name', 
-        'jenis_kendaraan', 
+        'vehicle_type', 
         'plat_nomor', 
         'keberangkatan', 
         'kepulangan', 
