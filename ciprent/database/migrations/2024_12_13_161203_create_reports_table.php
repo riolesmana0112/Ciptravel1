@@ -20,8 +20,8 @@ class CreateReportsTable extends Migration
             $table->string('jenis_kendaraan');
             $table->string('plat_nomor');
             $table->string('tujuan');
-            $table->date('keberangkatan');
-            $table->time('kepulangan');
+            $table->timestamp('keberangkatan');
+            $table->timestamp('kepulangan');
             $table->string('type_sewa');
             $table->text('keterangan_type');
             $table->decimal('harga_sewa', 10, 2);
