@@ -100,7 +100,7 @@ class BopController extends Controller
             'keberangkatan' => $validated['keberangkatan'],
             'kepulangan' => $validated['kepulangan'],
             'harga' => str_replace('.', '', $validated['harga']), // Hilangkan pemisah ribuan jika ada
-            'approval_status' => $request->has('approval_status') ? 1 : 0, // Ubah checkbox menjadi boolean
+            'approval_status' => $request->approval_status, // Ubah checkbox menjadi boolean
             'nomor_rekening' => $validated['nomor_rekening'],
         ]);
 
